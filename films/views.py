@@ -1,10 +1,6 @@
 from django.shortcuts import render
+from .models import Film
 
 def film_list(request):
-    # For now, just a static list
-    films = [
-        {"title": "Inception", "year": 2010},
-        {"title": "The Matrix", "year": 1999},
-        {"title": "Interstellar", "year": 2014},
-    ]
+    films = Film.objects.all()  # get all films from the database
     return render(request, "films/film_list.html", {"films": films})

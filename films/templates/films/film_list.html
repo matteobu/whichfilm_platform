@@ -1,0 +1,12 @@
+{% extends "films/base.html" %}
+
+{% block title %}Film List - WhichFilm{% endblock %}
+
+{% block content %}
+<h2>Available Films</h2>
+<ul>
+    {% for film in films %}
+        <li>{{ film.title }} ({{ film.year }})</li>
+    {% endfor %}
+</ul>
+{% endblock %}

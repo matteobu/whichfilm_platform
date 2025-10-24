@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8baee565-f4d4-42d2-8a7c-e23bdb07e1ae" name="Changes" comment="Fix - Removed whichfilm app">
+    <list default="true" id="8baee565-f4d4-42d2-8a7c-e23bdb07e1ae" name="Changes" comment="Fix - Youtube Service to get info from YT channel">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integrations/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/integrations/apps.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,6 +49,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "DefaultHtmlFileTemplate": "HTML File",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
@@ -107,7 +109,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1760704459385</updated>
-      <workItem from="1761302367725" duration="1158000" />
+      <workItem from="1761302367725" duration="7110000" />
     </task>
     <task id="LOCAL-00001" summary="Fix - Removed whichfilm app">
       <option name="closed" value="true" />
@@ -117,7 +119,23 @@
       <option name="project" value="LOCAL" />
       <updated>1761303137118</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Fix - Create a YT Film Info Models">
+      <option name="closed" value="true" />
+      <created>1761309259535</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1761309259535</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Fix - Youtube Service to get info from YT channel">
+      <option name="closed" value="true" />
+      <created>1761309286380</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1761309286380</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -125,6 +143,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Fix - Removed whichfilm app" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix - Removed whichfilm app" />
+    <MESSAGE value="Fix - Create a YT Film Info Models" />
+    <MESSAGE value="Fix - Youtube Service to get info from YT channel" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix - Youtube Service to get info from YT channel" />
   </component>
 </project>

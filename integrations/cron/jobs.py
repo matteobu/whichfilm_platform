@@ -1,0 +1,61 @@
+import os
+import sys
+import django
+
+# Add parent directory to path
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+
+# Setup Django
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'whichfilm_platform.settings')
+django.setup()
+
+from integrations.services.youtube_service import YouTubeService
+from integrations.models import YTFilmTitle
+
+
+def fetch_youtube_videos():
+    """
+    Fetch latest YouTube videos and save to database.
+    This job is called by a cron job every 12 hours.
+    """
+    print("=" * 50)
+    print("Starting fetch_youtube_videos job...")
+    print("=" * 50)
+
+    try:
+        # Fetch videos from YouTube
+        service = YouTubeService()
+        videos = service.get_videos()
+
+        if not videos:
+            print("No videos found")
+            return
+
+        print(f"Found {len(videos)} videos")
+
+        # Save to database
+        created_count = 0
+        updated_count = 0
+
+        for video in videos:
+            obj, created = YTFilmTitle.objects.update_or_create(
+                youtube_video_id=video['video_id'],
+                defaults={'title': video['title']}
+            )
+
+            if created:
+                created_count += 1
+                print(f"[NEW] {video['title']}")
+            else:
+                updated_count += 1
+                print(f"[UPDATED] {video['title']}")
+
+        print("=" * 50)
+        print(f"Job completed: {created_count} new, {updated_count} updated")
+        print("=" * 50)
+
+    except Exception as e:
+        print(f"Error in fetch_youtube_videos: {e}")
+        import traceback
+        traceback.print_exc()
+        sys.exit(1)

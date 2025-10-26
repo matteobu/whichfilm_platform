@@ -7,11 +7,17 @@
     <list default="true" id="8baee565-f4d4-42d2-8a7c-e23bdb07e1ae" name="Changes" comment="Fix - Youtube Service to get info from YT channel">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/integrations/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/integrations/apps.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integrations/cron/jobs.py" beforeDir="false" afterPath="$PROJECT_DIR$/integrations/cron/jobs.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integrations/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/integrations/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integrations/services/youtube_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/integrations/services/youtube_service.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -109,7 +115,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1760704459385</updated>
-      <workItem from="1761302367725" duration="7110000" />
+      <workItem from="1761302367725" duration="15416000" />
     </task>
     <task id="LOCAL-00001" summary="Fix - Removed whichfilm app">
       <option name="closed" value="true" />

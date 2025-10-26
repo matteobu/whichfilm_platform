@@ -3,7 +3,7 @@ import xml.etree.ElementTree as ET
 from urllib.parse import urlparse, parse_qs
 
 class YouTubeService:
-    CHANNEL_ID = "UCE0Wkd9Jcn2-TNo5G8bLQrA"
+    CHANNEL_ID = "UCLyYEq4ODlw3OD9qhGqwimw"  # RottenTomatoesINDIE
     BASE_RSS_URL = "https://www.youtube.com/feeds/videos.xml?channel_id={}"
     NAMESPACES = {
         'atom': 'http://www.w3.org/2005/Atom',
@@ -91,18 +91,81 @@ class YouTubeService:
             print(f"Error extracting video ID: {e}")
             return ''
 
+    def _extract_year(self, title):
+        """
+        Extract year from trailer title.
+
+        Examples:
+        - "Bunny Trailer #1 (2025)" → 2025
+        - "Young Washington Teaser Trailer (2026)" → 2026
+
+        Returns:
+            int or None: Year if found, None otherwise
+        """
+        import re
+
+        match = re.search(r'\((\d{4})\)', title)
+        if match:
+            return int(match.group(1))
+        return None
+
+    def _clean_title(self, title):
+        """
+        Extract movie title from official trailer format only.
+        Skip teaser trailers.
+
+        Examples:
+        - "Little Trouble Girls Trailer #1 (2025)" → "Little Trouble Girls"
+        - "Young Washington Teaser Trailer (2026)" → None (skip)
+        - "Bunny Trailer #1 (2025)" → "Bunny"
+
+        Returns:
+            str or None: Cleaned movie title, or None if not an official trailer
+        """
+        import re
+
+        # Only process if it has "Trailer #" (official trailers, not teasers)
+        if 'Trailer #' not in title:
+            return None  # Skip teaser trailers
+
+        # Extract everything before "Trailer #"
+        match = re.match(r'^(.+?)\s+Trailer\s+#', title)
+
+        if match:
+            cleaned = match.group(1).strip()
+            return cleaned if cleaned else None
+
+        return None
+
     def _extract_title_and_id(self, videos):
         """
-        Extract only title and video_id from parsed videos
+        Extract title, year, and video_id from parsed videos.
+        Clean titles and filter to official trailers only.
 
         Input: List of video dicts with title, video_url, etc.
-        Output: List of dicts with only title and video_id
+        Output: List of dicts with cleaned title, year, original_title, and video_id
         """
         processed = []
         for video in videos:
+            original_title = video['title']
+
+            # Clean title (returns None for teaser trailers)
+            cleaned_title = self._clean_title(original_title)
+
+            # Skip if not an official trailer
+            if cleaned_title is None:
+                continue
+
+            # Extract year
+            year = self._extract_year(original_title)
+
+            # Extract video ID
             video_id = self._extract_video_id(video['video_url'])
+
             processed.append({
-                'title': video['title'],
+                'title': cleaned_title,
+                'year': year,
+                'original_title': original_title,
                 'video_id': video_id
             })
         return processed

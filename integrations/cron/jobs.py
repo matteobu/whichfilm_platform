@@ -10,7 +10,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'whichfilm_platform.settings')
 django.setup()
 
 from integrations.services.youtube_service import YouTubeService
-from integrations.models import YTFilmTitle
+from integrations.models import SourceFilmTitle
 
 
 def fetch_youtube_videos():
@@ -38,17 +38,22 @@ def fetch_youtube_videos():
         updated_count = 0
 
         for video in videos:
-            obj, created = YTFilmTitle.objects.update_or_create(
-                youtube_video_id=video['video_id'],
-                defaults={'title': video['title']}
+            obj, created = SourceFilmTitle.objects.update_or_create(
+                video_id=video['video_id'],
+                defaults={
+                    'title': video['title'],
+                    'year': video['year'],
+                    'original_title': video['original_title'],
+                    'source': 'youtube'
+                }
             )
 
             if created:
                 created_count += 1
-                print(f"[NEW] {video['title']}")
+                print(f"[NEW] {video['title']} ({video['year']})")
             else:
                 updated_count += 1
-                print(f"[UPDATED] {video['title']}")
+                print(f"[UPDATED] {video['title']} ({video['year']})")
 
         print("=" * 50)
         print(f"Job completed: {created_count} new, {updated_count} updated")

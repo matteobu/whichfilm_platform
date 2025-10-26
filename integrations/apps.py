@@ -15,7 +15,8 @@ class IntegrationsConfig(AppConfig):
         # Run in a separate thread to avoid Django reentrant error
         threading.Thread(target=self._start_scheduler, daemon=True).start()
 
-    def _start_scheduler(self):
+    @staticmethod
+    def _start_scheduler():
         """Start the scheduler in a separate thread"""
         from integrations.tasks import start_scheduler
         start_scheduler()

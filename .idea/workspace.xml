@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8baee565-f4d4-42d2-8a7c-e23bdb07e1ae" name="Changes" comment="Fix - Update the DB Table to a more generic">
+    <list default="true" id="8baee565-f4d4-42d2-8a7c-e23bdb07e1ae" name="Changes" comment="Refactor(integrations): Move to clients/ folder following Django best practices">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integrations/cron/jobs.py" beforeDir="false" afterPath="$PROJECT_DIR$/integrations/cron/jobs.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,7 +111,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1760704459385</updated>
-      <workItem from="1761302367725" duration="16943000" />
+      <workItem from="1761302367725" duration="18198000" />
     </task>
     <task id="LOCAL-00001" summary="Fix - Removed whichfilm app">
       <option name="closed" value="true" />
@@ -146,7 +145,15 @@
       <option name="project" value="LOCAL" />
       <updated>1761483021643</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Refactor(integrations): Move to clients/ folder following Django best practices">
+      <option name="closed" value="true" />
+      <created>1761491365936</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1761491365936</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -157,6 +164,7 @@
     <MESSAGE value="Fix - Create a YT Film Info Models" />
     <MESSAGE value="Fix - Youtube Service to get info from YT channel" />
     <MESSAGE value="Fix - Update the DB Table to a more generic" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix - Update the DB Table to a more generic" />
+    <MESSAGE value="Refactor(integrations): Move to clients/ folder following Django best practices" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactor(integrations): Move to clients/ folder following Django best practices" />
   </component>
 </project>

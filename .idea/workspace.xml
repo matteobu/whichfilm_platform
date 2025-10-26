@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8baee565-f4d4-42d2-8a7c-e23bdb07e1ae" name="Changes" comment="Refactor(integrations): Move to clients/ folder following Django best practices">
+    <list default="true" id="8baee565-f4d4-42d2-8a7c-e23bdb07e1ae" name="Changes" comment="refactor: Rename Django project folder from whichfilm_platform to whichfilm">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -32,12 +32,12 @@
     &quot;assignee&quot;: &quot;matteobu&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;git@github.com:matteobu/whichfilmapp.git&quot;,
-    &quot;accountId&quot;: &quot;f5237ec4-dc40-4a7d-9737-f1b278767850&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "git@github.com:matteobu/whichfilm_platform.git",
+    "accountId": "f5237ec4-dc40-4a7d-9737-f1b278767850"
   }
-}</component>
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
 }</component>
@@ -111,7 +111,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1760704459385</updated>
-      <workItem from="1761302367725" duration="18198000" />
+      <workItem from="1761302367725" duration="19641000" />
     </task>
     <task id="LOCAL-00001" summary="Fix - Removed whichfilm app">
       <option name="closed" value="true" />
@@ -153,7 +153,15 @@
       <option name="project" value="LOCAL" />
       <updated>1761491365936</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="refactor: Rename Django project folder from whichfilm_platform to whichfilm">
+      <option name="closed" value="true" />
+      <created>1761493290171</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1761493290171</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -165,6 +173,7 @@
     <MESSAGE value="Fix - Youtube Service to get info from YT channel" />
     <MESSAGE value="Fix - Update the DB Table to a more generic" />
     <MESSAGE value="Refactor(integrations): Move to clients/ folder following Django best practices" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactor(integrations): Move to clients/ folder following Django best practices" />
+    <MESSAGE value="refactor: Rename Django project folder from whichfilm_platform to whichfilm" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: Rename Django project folder from whichfilm_platform to whichfilm" />
   </component>
 </project>

@@ -9,7 +9,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspa
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'whichfilm_platform.settings')
 django.setup()
 
-from integrations.services.youtube_service import YouTubeService
+from integrations.clients import YouTubeAPIClient
 from integrations.models import SourceFilmTitle
 
 
@@ -24,8 +24,8 @@ def fetch_youtube_videos():
 
     try:
         # Fetch videos from YouTube
-        service = YouTubeService()
-        videos = service.get_videos()
+        client = YouTubeAPIClient()
+        videos = client.get_videos()
 
         if not videos:
             print("No videos found")

@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8baee565-f4d4-42d2-8a7c-e23bdb07e1ae" name="Changes" comment="Fix - Youtube Service to get info from YT channel">
+    <list default="true" id="8baee565-f4d4-42d2-8a7c-e23bdb07e1ae" name="Changes" comment="Fix - Update the DB Table to a more generic">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integrations/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/integrations/apps.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/integrations/cron/jobs.py" beforeDir="false" afterPath="$PROJECT_DIR$/integrations/cron/jobs.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integrations/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/integrations/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integrations/services/youtube_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/integrations/services/youtube_service.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,7 +112,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1760704459385</updated>
-      <workItem from="1761302367725" duration="15416000" />
+      <workItem from="1761302367725" duration="16943000" />
     </task>
     <task id="LOCAL-00001" summary="Fix - Removed whichfilm app">
       <option name="closed" value="true" />
@@ -141,7 +138,15 @@
       <option name="project" value="LOCAL" />
       <updated>1761309286380</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Fix - Update the DB Table to a more generic">
+      <option name="closed" value="true" />
+      <created>1761483021643</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1761483021643</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -151,6 +156,7 @@
     <MESSAGE value="Fix - Removed whichfilm app" />
     <MESSAGE value="Fix - Create a YT Film Info Models" />
     <MESSAGE value="Fix - Youtube Service to get info from YT channel" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix - Youtube Service to get info from YT channel" />
+    <MESSAGE value="Fix - Update the DB Table to a more generic" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix - Update the DB Table to a more generic" />
   </component>
 </project>

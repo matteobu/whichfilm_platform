@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'django_dramatiq',
     'movies',
     'festivals',
     'rest_framework',
@@ -129,3 +130,18 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+# Dramatiq Configuration
+# https://dramatiq.io/
+
+DRAMATIQ_BROKER = {
+    "BROKER": "dramatiq.brokers.redis.RedisBroker",
+    "OPTIONS": {
+        "url": config('DRAMATIQ_REDIS_URL', 'redis://localhost:6379'),
+    },
+    "MIDDLEWARE": [
+        "dramatiq.middleware.Retries",
+        "dramatiq.middleware.Callbacks",
+    ],
+}

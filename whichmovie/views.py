@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 
 def home(request):
-    return render(request, 'whichfilm_platform/home.html')
+    """Redirect home to movies list."""
+    return redirect('movie_list')

@@ -43,26 +43,29 @@ def fetch_youtube_videos():
 
         # Save to database
         created_count = 0
-        updated_count = 0
+        skipped_count = 0
 
         for video in videos:
-            movie, created = Movie.objects.update_or_create(
+            # Check if movie already exists by title
+            existing_movie = Movie.objects.filter(title=video['title']).first()
+
+            if existing_movie:
+                # Movie already exists, skip it
+                logger.info(f"[SKIPPED] {video['title']} already in database")
+                skipped_count += 1
+                continue
+
+            # Create new movie
+            movie = Movie.objects.create(
+                title=video['title'],
+                original_title=video['original_title'],
                 video_id=video['video_id'],
-                defaults={
-                    'title': video['title'],
-                    'original_title': video['original_title'],
-                    'source': 'youtube_title'
-                }
+                source='youtube_title'
             )
+            created_count += 1
+            logger.info(f"[NEW] {video['title']} ({video['year']})")
 
-            if created:
-                created_count += 1
-                logger.info(f"[NEW] {video['title']} ({video['year']})")
-            else:
-                updated_count += 1
-                logger.info(f"[UPDATED] {video['title']} ({video['year']})")
-
-        logger.info(f"Task completed: {created_count} new, {updated_count} updated")
+        logger.info(f"Task completed: {created_count} new, {skipped_count} skipped")
 
     except Exception as e:
         logger.error(f"Error fetching YouTube videos: {e}", exc_info=True)

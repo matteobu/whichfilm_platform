@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8baee565-f4d4-42d2-8a7c-e23bdb07e1ae" name="Changes" comment="feat: Add initial migration and models for Movie and Film">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/whichmovie/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/whichmovie/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/whichmovie/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/whichmovie/settings.py" afterDir="false" />
-    </list>
+    <list default="true" id="8baee565-f4d4-42d2-8a7c-e23bdb07e1ae" name="Changes" comment="feat: Initialize Dramatiq and configure broker settings" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -141,7 +137,7 @@
       <workItem from="1761812470521" duration="598000" />
       <workItem from="1761825201010" duration="6000" />
       <workItem from="1761907792422" duration="4414000" />
-      <workItem from="1761915872409" duration="1346000" />
+      <workItem from="1761915872409" duration="1960000" />
     </task>
     <task id="LOCAL-00001" summary="Fix - Removed whichfilm app">
       <option name="closed" value="true" />
@@ -207,7 +203,15 @@
       <option name="project" value="LOCAL" />
       <updated>1761915997541</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="feat: Initialize Dramatiq and configure broker settings">
+      <option name="closed" value="true" />
+      <created>1761917456645</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1761917456645</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -222,6 +226,7 @@
     <MESSAGE value="refactor: Rename Django project folder from whichfilm_platform to whichfilm" />
     <MESSAGE value="fix: Update Django settings module from whichfilm to whichmovie" />
     <MESSAGE value="feat: Add initial migration and models for Movie and Film" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: Add initial migration and models for Movie and Film" />
+    <MESSAGE value="feat: Initialize Dramatiq and configure broker settings" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: Initialize Dramatiq and configure broker settings" />
   </component>
 </project>

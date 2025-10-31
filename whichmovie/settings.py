@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'django_dramatiq',
+    'dramatiq_crontab',
     'movies',
     'festivals',
     'rest_framework',

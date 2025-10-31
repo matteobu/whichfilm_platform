@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8baee565-f4d4-42d2-8a7c-e23bdb07e1ae" name="Changes" comment="feat: Initialize Dramatiq and configure broker settings" />
+    <list default="true" id="8baee565-f4d4-42d2-8a7c-e23bdb07e1ae" name="Changes" comment="feat: Add Dramatiq crontab integration and new migration for Movie model">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movies/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/movies/tasks.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -137,7 +140,7 @@
       <workItem from="1761812470521" duration="598000" />
       <workItem from="1761825201010" duration="6000" />
       <workItem from="1761907792422" duration="4414000" />
-      <workItem from="1761915872409" duration="1960000" />
+      <workItem from="1761915872409" duration="3099000" />
     </task>
     <task id="LOCAL-00001" summary="Fix - Removed whichfilm app">
       <option name="closed" value="true" />
@@ -211,7 +214,15 @@
       <option name="project" value="LOCAL" />
       <updated>1761917456645</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="feat: Add Dramatiq crontab integration and new migration for Movie model">
+      <option name="closed" value="true" />
+      <created>1761918111099</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1761918111099</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -227,6 +238,19 @@
     <MESSAGE value="fix: Update Django settings module from whichfilm to whichmovie" />
     <MESSAGE value="feat: Add initial migration and models for Movie and Film" />
     <MESSAGE value="feat: Initialize Dramatiq and configure broker settings" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: Initialize Dramatiq and configure broker settings" />
+    <MESSAGE value="feat: Add Dramatiq crontab integration and new migration for Movie model" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: Add Dramatiq crontab integration and new migration for Movie model" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="NONE" type="python-line">
+          <url>file://$PROJECT_DIR$/movies/tasks.py</url>
+          <line>13</line>
+          <log-expression expression="logger.info(f&quot;[UPDATED] {video['title']} ({video['year']})&quot;)&#10;&#10;        logger.info(f&quot;Task completed: {created_count} new, {updated_count} updated&quot;)&#10;&#10;    except Exception as e:&#10;        logger.error(f&quot;Error fetching YouTube videos: {e}&quot;, exc_info=True)&#10;        raise" language="Python" />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

@@ -1,7 +1,5 @@
 {% extends "movies/base.html" %}
 {% block content %}
-<h1>🎬 WhichMovie - Indie Movie Database</h1>
-
 {% if movies %}
   <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px;">
     {% for movie in movies %}

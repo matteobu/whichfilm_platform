@@ -24,6 +24,12 @@ class Movie(models.Model):
     )
     video_id = models.CharField(max_length=50, blank=True, null=True)  # YouTube video ID
 
+    # TMDB enrichment fields (populated by enrich_movies_with_tmdb task)
+    overview = models.TextField(blank=True, null=True)
+    release_date = models.DateField(blank=True, null=True)
+    poster_path = models.CharField(max_length=255, blank=True, null=True)
+    backdrop_path = models.CharField(max_length=255, blank=True, null=True)
+
     # Metadata
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

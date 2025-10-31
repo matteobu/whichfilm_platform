@@ -109,6 +109,7 @@ def enrich_movies_with_tmdb():
                     movie.overview = tmdb_data.get('overview')
                     movie.release_date = tmdb_data.get('release_date')
                     movie.poster_path = tmdb_data.get('poster_path')
+                    movie.backdrop_path = tmdb_data.get('backdrop_path')
                     movie.save()
 
                     enriched_count += 1

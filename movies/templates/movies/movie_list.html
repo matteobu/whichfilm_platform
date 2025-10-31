@@ -1,0 +1,14 @@
+{% extends "movies/base.html" %}
+{% block content %}
+<h1>Movie List</h1>
+
+<ul>
+  {% for movie in movies %}
+    <li>
+      <strong>{{ movie.title }}</strong> ({{ movie.source }}) - {{ movie.created_at|date:"Y-m-d" }}
+    </li>
+  {% empty %}
+    <li>No movies found.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

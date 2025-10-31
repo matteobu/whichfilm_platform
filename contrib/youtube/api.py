@@ -249,7 +249,7 @@ class MubiClient(YouTubeBaseClient):
     Override _clean_title() with Mubi-specific parsing logic.
     """
 
-    CHANNEL_ID = "UUEuIk8O5Cyzl8J_ylPFzA"
+    CHANNEL_ID = "UCb6-VM5UQ4Czj_d3m9EPGfg"
 
     def _clean_title(self, title):
         """

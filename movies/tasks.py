@@ -6,7 +6,7 @@ Defines async tasks and cron jobs for movie data fetching and processing.
 
 import dramatiq
 from dramatiq_crontab import cron
-from contrib.youtube import YouTubeClient
+from contrib.youtube import YouTubeClient, MubiClient
 from contrib.tmdb import TMDBClient
 from .models import Movie
 import logging
@@ -14,32 +14,27 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-@cron('0 0 * * *')  # Run daily at midnight UTC
-@dramatiq.actor(max_retries=3)
-def fetch_youtube_videos():
+def _fetch_and_save_videos(client, source_name):
     """
-        Core logic: Fetch YouTube videos and save to database.
+    Core logic: Fetch videos from a YouTube client and save to database.
 
-        This is the actual implementation that both:
-        - The Dramatiq cron job calls
-        - Manual CLI calls use
+    This is a reusable helper for both RottenTomatoes and MUBI channels.
 
-        Can be called from:
-        1. Cron job (automatic)
-        2. Shell: from movies.tasks import _fetch_and_save_youtube_videos; _fetch_and_save_youtube_videos()
-        """
-    logger.info("Starting YouTube video fetch...")
+    Args:
+        client: YouTube client instance (YouTubeClient or MubiClient)
+        source_name: Source identifier for database ('youtube_title' or 'mubi')
+    """
+    logger.info(f"Starting {source_name} video fetch...")
 
     try:
-        # Fetch videos from YouTube
-        client = YouTubeClient()
+        # Fetch videos
         videos = client.get_videos()
 
         if not videos:
-            logger.info("No videos found from YouTube")
+            logger.info(f"No videos found from {source_name}")
             return
 
-        logger.info(f"Found {len(videos)} videos from YouTube")
+        logger.info(f"Found {len(videos)} videos from {source_name}")
 
         # Save to database
         created_count = 0
@@ -60,7 +55,7 @@ def fetch_youtube_videos():
                 title=video['title'],
                 original_title=video['original_title'],
                 video_id=video['video_id'],
-                source='youtube_title'
+                source=source_name
             )
             created_count += 1
             logger.info(f"[NEW] {video['title']} ({video['year']})")
@@ -68,11 +63,37 @@ def fetch_youtube_videos():
         logger.info(f"Task completed: {created_count} new, {skipped_count} skipped")
 
     except Exception as e:
-        logger.error(f"Error fetching YouTube videos: {e}", exc_info=True)
+        logger.error(f"Error fetching {source_name} videos: {e}", exc_info=True)
         raise
 
 
-@cron('0 2 * * *')  # Run daily at 2 AM UTC (after YouTube fetch at midnight)
+@cron('0 0 * * *')  # Run daily at midnight UTC
+@dramatiq.actor(max_retries=3)
+def fetch_rotten_tomatoes_videos():
+    """
+    Cron Task: Fetch RottenTomatoes YouTube channel videos.
+
+    Fetches latest videos and saves to database.
+    Runs daily at midnight UTC.
+    """
+    client = YouTubeClient()
+    _fetch_and_save_videos(client, 'youtube_title')
+
+
+@cron('0 1 * * *')  # Run daily at 1 AM UTC (after YouTube fetch at midnight)
+@dramatiq.actor(max_retries=3)
+def fetch_mubi_videos():
+    """
+    Cron Task: Fetch MUBI YouTube channel videos.
+
+    Fetches latest videos and saves to database.
+    Runs daily at 1 AM UTC (1 hour after RottenTomatoes fetch).
+    """
+    client = MubiClient()
+    _fetch_and_save_videos(client, 'mubi')
+
+
+@cron('0 2 * * *')  # Run daily at 2 AM UTC (after MUBI fetch at 1 AM)
 @dramatiq.actor(max_retries=3)
 def enrich_movies_with_tmdb():
     """

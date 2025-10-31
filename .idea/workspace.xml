@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8baee565-f4d4-42d2-8a7c-e23bdb07e1ae" name="Changes" comment="feat: Update header title and remove duplicate title in movie list">
+    <list default="true" id="8baee565-f4d4-42d2-8a7c-e23bdb07e1ae" name="Changes" comment="feat: Add RottenTomatoesClient and MubiClient to YouTube data source integration">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/contrib/youtube/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/contrib/youtube/api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movies/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/movies/tasks.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -147,7 +148,7 @@
       <workItem from="1761812470521" duration="598000" />
       <workItem from="1761825201010" duration="6000" />
       <workItem from="1761907792422" duration="4414000" />
-      <workItem from="1761915872409" duration="8368000" />
+      <workItem from="1761915872409" duration="9201000" />
     </task>
     <task id="LOCAL-00001" summary="Fix - Removed whichfilm app">
       <option name="closed" value="true" />
@@ -285,7 +286,23 @@
       <option name="project" value="LOCAL" />
       <updated>1761923238771</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="feat: Refactor YouTube API client to support multiple channel clients and improve title extraction">
+      <option name="closed" value="true" />
+      <created>1761924680412</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1761924680412</updated>
+    </task>
+    <task id="LOCAL-00019" summary="feat: Add RottenTomatoesClient and MubiClient to YouTube data source integration">
+      <option name="closed" value="true" />
+      <created>1761924707995</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1761924707995</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -309,7 +326,9 @@
     <MESSAGE value="feat: Update movie list display with TMDB enrichment and improved layout" />
     <MESSAGE value="feat: Update movie list layout and enhance title for clarity" />
     <MESSAGE value="feat: Update header title and remove duplicate title in movie list" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: Update header title and remove duplicate title in movie list" />
+    <MESSAGE value="feat: Refactor YouTube API client to support multiple channel clients and improve title extraction" />
+    <MESSAGE value="feat: Add RottenTomatoesClient and MubiClient to YouTube data source integration" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: Add RottenTomatoesClient and MubiClient to YouTube data source integration" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

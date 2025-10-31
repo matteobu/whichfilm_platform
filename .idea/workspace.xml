@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8baee565-f4d4-42d2-8a7c-e23bdb07e1ae" name="Changes" comment="feat: Add TMDB enrichment task for movies and update cron schedule">
-      <change beforePath="$PROJECT_DIR$/movies/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/movies/models.py" afterDir="false" />
+    <list default="true" id="8baee565-f4d4-42d2-8a7c-e23bdb07e1ae" name="Changes" comment="feat: Add backdrop_path, overview, poster_path, and release_date fields to Movie model">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contrib/tmdb/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/contrib/tmdb/api.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -139,7 +140,7 @@
       <workItem from="1761812470521" duration="598000" />
       <workItem from="1761825201010" duration="6000" />
       <workItem from="1761907792422" duration="4414000" />
-      <workItem from="1761915872409" duration="3491000" />
+      <workItem from="1761915872409" duration="4154000" />
     </task>
     <task id="LOCAL-00001" summary="Fix - Removed whichfilm app">
       <option name="closed" value="true" />
@@ -229,7 +230,23 @@
       <option name="project" value="LOCAL" />
       <updated>1761919258277</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="feat: Add TMDB enrichment fields to Movie model and update enrichment task">
+      <option name="closed" value="true" />
+      <created>1761919407322</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1761919407322</updated>
+    </task>
+    <task id="LOCAL-00013" summary="feat: Add backdrop_path, overview, poster_path, and release_date fields to Movie model">
+      <option name="closed" value="true" />
+      <created>1761919462629</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1761919462629</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -247,7 +264,9 @@
     <MESSAGE value="feat: Initialize Dramatiq and configure broker settings" />
     <MESSAGE value="feat: Add Dramatiq crontab integration and new migration for Movie model" />
     <MESSAGE value="feat: Add TMDB enrichment task for movies and update cron schedule" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: Add TMDB enrichment task for movies and update cron schedule" />
+    <MESSAGE value="feat: Add TMDB enrichment fields to Movie model and update enrichment task" />
+    <MESSAGE value="feat: Add backdrop_path, overview, poster_path, and release_date fields to Movie model" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: Add backdrop_path, overview, poster_path, and release_date fields to Movie model" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

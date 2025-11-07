@@ -4,14 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8baee565-f4d4-42d2-8a7c-e23bdb07e1ae" name="Changes" comment="feat: Add tests for RottenTomatoesClient and shared pytest fixtures">
-      <change afterPath="$PROJECT_DIR$/contrib/youtube/tests/MubiClient/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contrib/youtube/tests/RottenTomatoesClient/__init__.py" afterDir="false" />
+    <list default="true" id="8baee565-f4d4-42d2-8a7c-e23bdb07e1ae" name="Changes" comment="feat: Add unit tests for MubiClient methods and structure test suites">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contrib/youtube/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/contrib/youtube/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contrib/youtube/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/contrib/youtube/api.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contrib/youtube/tests/test_rotten_tomatoes_client.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/movies/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/movies/tasks.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contrib/youtube/tests/test_rotten_tomatoes_client.py" beforeDir="false" afterPath="$PROJECT_DIR$/contrib/youtube/tests/test_rotten_tomatoes_client.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,7 +128,7 @@
       <workItem from="1761927134983" duration="8265000" />
       <workItem from="1762095135163" duration="9000" />
       <workItem from="1762095282962" duration="6572000" />
-      <workItem from="1762439119751" duration="10048000" />
+      <workItem from="1762439119751" duration="11398000" />
     </task>
     <task id="LOCAL-00001" summary="Fix - Removed whichfilm app">
       <option name="closed" value="true" />
@@ -311,11 +306,38 @@
       <option name="project" value="LOCAL" />
       <updated>1762519903031</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="feat: Remove YouTubeClient alias and update references to RottenTomatoesClient in the codebase">
+      <option name="closed" value="true" />
+      <created>1762524747931</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1762524747931</updated>
+    </task>
+    <task id="LOCAL-00024" summary="feat: Add unit tests for MubiClient methods and structure test suites">
+      <option name="closed" value="true" />
+      <created>1762524784176</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1762524784176</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Fix - Removed whichfilm app" />
@@ -340,7 +362,9 @@
     <MESSAGE value="feat: Enhance YouTube video fetching with MubiClient integration and refactor fetching logic" />
     <MESSAGE value="feat: Refactor YouTube API client to use yt-dlp for video fetching and improve channel URL handling" />
     <MESSAGE value="feat: Add tests for RottenTomatoesClient and shared pytest fixtures" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: Add tests for RottenTomatoesClient and shared pytest fixtures" />
+    <MESSAGE value="feat: Remove YouTubeClient alias and update references to RottenTomatoesClient in the codebase" />
+    <MESSAGE value="feat: Add unit tests for MubiClient methods and structure test suites" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: Add unit tests for MubiClient methods and structure test suites" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

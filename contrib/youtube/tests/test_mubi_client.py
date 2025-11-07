@@ -7,7 +7,7 @@ Organized by method type:
 - Integration tests: get_data (full pipeline)
 """
 import pytest
-from contrib.youtube.api import MubiClient
+from contrib.youtube.api import MubiClient, RottenTomatoesClient
 
 
 class TestMubiClientCleanTitle:
@@ -49,8 +49,16 @@ class TestMubiClientCleanTitle:
 class TestMubiClientFetchVideos:
     """Test suite for MubiClient._fetch_videos() method (with mocking)."""
 
-    # TODO: Add tests with @patch for yt-dlp mocking
-    pass
+    def test_fetch_videos__success(self, mubi_client_mocked):
+        """Test that _fetch_videos extracts videos correctly."""
+        result = mubi_client_mocked._fetch_videos()
+
+        # Assert we got a list with correct number of videos
+        assert len(result) == 3
+        assert result[0]['title'] == 'DUNE | Official Trailer #1'
+        assert result[0]['video_id'] == 'mubi_abc123'
+        assert result[1]['video_id'] == 'mubi_xyz789'
+        assert result[2]['video_id'] == 'mubi_skip123'
 
 
 class TestMubiClientGetData:

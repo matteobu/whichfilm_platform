@@ -49,8 +49,16 @@ class TestRottenTomatoesClientCleanTitle:
 class TestRottenTomatoesClientFetchVideos:
     """Test suite for RottenTomatoesClient._fetch_videos() method (with mocking)."""
 
-    # TODO: Add tests with @patch for yt-dlp mocking
-    pass
+    def test_fetch_videos__success(self, rotten_tomatoes_client_mocked):
+        """Test that _fetch_videos extracts videos correctly."""
+        result = rotten_tomatoes_client_mocked._fetch_videos()
+
+        # Assert we got a list with correct number of videos
+        assert len(result) == 3
+        assert result[0]['title'] == 'The Lord of the Rings Official Trailer #1 (2025)'
+        assert result[0]['video_id'] == 'abc123'
+        assert result[1]['video_id'] == 'xyz789'
+        assert result[2]['video_id'] == 'skip123'
 
 
 class TestRottenTomatoesClientGetData:

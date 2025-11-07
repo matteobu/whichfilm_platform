@@ -4,28 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8baee565-f4d4-42d2-8a7c-e23bdb07e1ae" name="Changes" comment="feat: Enhance YouTube video fetching with MubiClient integration and refactor fetching logic">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="8baee565-f4d4-42d2-8a7c-e23bdb07e1ae" name="Changes" comment="feat: Add tests for RottenTomatoesClient and shared pytest fixtures">
+      <change afterPath="$PROJECT_DIR$/contrib/youtube/tests/MubiClient/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contrib/youtube/tests/RottenTomatoesClient/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contrib/base/client.py" beforeDir="false" afterPath="$PROJECT_DIR$/contrib/base/client.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contrib/festivals/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/contrib/festivals/api.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contrib/youtube/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/contrib/youtube/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/contrib/youtube/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/contrib/youtube/api.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/festivals/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/festivals/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/festivals/apps.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/festivals/management/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/festivals/management/commands/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/festivals/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/festivals/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/festivals/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/festivals/tasks.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/festivals/tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/festivals/views.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/whichmovie/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/whichmovie/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/whichmovie/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/whichmovie/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/whichmovie/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/whichmovie/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contrib/youtube/tests/test_rotten_tomatoes_client.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movies/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/movies/tasks.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,6 +77,12 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/contrib/youtube/tests/RottenTomatoesClient" />
+      <recent name="$PROJECT_DIR$/contrib/youtube/tests/MubiClient" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="whichmovie_app" type="Python.DjangoServer" factoryName="Django server" activateToolWindowBeforeRun="false">
       <module name="whichmovie_app" />
@@ -141,7 +133,7 @@
       <workItem from="1761927134983" duration="8265000" />
       <workItem from="1762095135163" duration="9000" />
       <workItem from="1762095282962" duration="6572000" />
-      <workItem from="1762439119751" duration="5394000" />
+      <workItem from="1762439119751" duration="10048000" />
     </task>
     <task id="LOCAL-00001" summary="Fix - Removed whichfilm app">
       <option name="closed" value="true" />
@@ -303,7 +295,23 @@
       <option name="project" value="LOCAL" />
       <updated>1761925354187</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="feat: Refactor YouTube API client to use yt-dlp for video fetching and improve channel URL handling">
+      <option name="closed" value="true" />
+      <created>1762519880209</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1762519880209</updated>
+    </task>
+    <task id="LOCAL-00022" summary="feat: Add tests for RottenTomatoesClient and shared pytest fixtures">
+      <option name="closed" value="true" />
+      <created>1762519903031</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1762519903031</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -330,7 +338,9 @@
     <MESSAGE value="feat: Refactor YouTube API client to support multiple channel clients and improve title extraction" />
     <MESSAGE value="feat: Add RottenTomatoesClient and MubiClient to YouTube data source integration" />
     <MESSAGE value="feat: Enhance YouTube video fetching with MubiClient integration and refactor fetching logic" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: Enhance YouTube video fetching with MubiClient integration and refactor fetching logic" />
+    <MESSAGE value="feat: Refactor YouTube API client to use yt-dlp for video fetching and improve channel URL handling" />
+    <MESSAGE value="feat: Add tests for RottenTomatoesClient and shared pytest fixtures" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: Add tests for RottenTomatoesClient and shared pytest fixtures" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

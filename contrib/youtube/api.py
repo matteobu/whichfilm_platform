@@ -246,13 +246,3 @@ class MubiClient(YouTubeBaseClient):
     def get_videos(self):
         """Fetch videos from Mubi channel."""
         return self.get_data()
-
-
-# Legacy alias for backward compatibility
-class YouTubeClient(RottenTomatoesClient):
-    """
-    Legacy alias for RottenTomatoesClient.
-
-    Use RottenTomatoesClient or MubiClient directly for clarity.
-    """
-    pass

@@ -6,7 +6,7 @@ Defines async tasks and cron jobs for movie data fetching and processing.
 
 import dramatiq
 from dramatiq_crontab import cron
-from contrib.youtube import YouTubeClient, MubiClient
+from contrib.youtube import RottenTomatoesClient, MubiClient
 from contrib.tmdb import TMDBClient
 from .models import Movie
 import logging
@@ -21,8 +21,8 @@ def _fetch_and_save_videos(client, source_name):
     This is a reusable helper for both RottenTomatoes and MUBI channels.
 
     Args:
-        client: YouTube client instance (YouTubeClient or MubiClient)
-        source_name: Source identifier for database ('youtube_title' or 'mubi')
+        client: YouTube client instance (RottenTomatoesClient or MubiClient)
+        source_name: Source identifier for database ('rotten_tomatoes' or 'mubi')
     """
     logger.info(f"Starting {source_name} video fetch...")
 
@@ -76,8 +76,8 @@ def fetch_rotten_tomatoes_videos():
     Fetches latest videos and saves to database.
     Runs daily at midnight UTC.
     """
-    client = YouTubeClient()
-    _fetch_and_save_videos(client, 'youtube_title')
+    client = RottenTomatoesClient()
+    _fetch_and_save_videos(client, 'rotten_tomatoes')
 
 
 @cron('0 1 * * *')  # Run daily at 1 AM UTC (after YouTube fetch at midnight)

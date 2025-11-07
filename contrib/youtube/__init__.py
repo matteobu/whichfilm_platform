@@ -1,5 +1,5 @@
 """YouTube data source integration."""
 
-from .api import YouTubeClient, RottenTomatoesClient, MubiClient
+from .api import RottenTomatoesClient, MubiClient
 
-__all__ = ['YouTubeClient', 'RottenTomatoesClient', 'MubiClient']
+__all__ = [ 'RottenTomatoesClient', 'MubiClient']

@@ -4,10 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8baee565-f4d4-42d2-8a7c-e23bdb07e1ae" name="Changes" comment="feat: Add RottenTomatoesClient and MubiClient to YouTube data source integration">
+    <list default="true" id="8baee565-f4d4-42d2-8a7c-e23bdb07e1ae" name="Changes" comment="feat: Enhance YouTube video fetching with MubiClient integration and refactor fetching logic">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contrib/base/client.py" beforeDir="false" afterPath="$PROJECT_DIR$/contrib/base/client.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contrib/festivals/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contrib/festivals/api.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/contrib/youtube/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/contrib/youtube/api.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/movies/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/movies/tasks.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/festivals/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/festivals/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/festivals/apps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/festivals/management/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/festivals/management/commands/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/festivals/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/festivals/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/festivals/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/festivals/tasks.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/festivals/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/festivals/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/whichmovie/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/whichmovie/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/whichmovie/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/whichmovie/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/whichmovie/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/whichmovie/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,7 +54,7 @@
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;git@github.com:matteobu/whichfilm_platform.git&quot;,
+    &quot;url&quot;: &quot;git@github.com:matteobu/whichmovie_app.git&quot;,
     &quot;accountId&quot;: &quot;f5237ec4-dc40-4a7d-9737-f1b278767850&quot;
   }
 }</component>
@@ -51,54 +69,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "DefaultHtmlFileTemplate": "HTML File",
-    "Django Server.whichmovie_app.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "django.template.preview.state": "SHOW_EDITOR_AND_PREVIEW",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "/Users/matteobucciol/Documents/repos_mb/whichmovie_app",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;Django Server.whichmovie_app.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenDjangoStructureViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;django.template.preview.state&quot;: &quot;SHOW_EDITOR_AND_PREVIEW&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/matteobucciol/Documents/repos_mb/whichmovie_app&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
-  <component name="RunManager" selected="Django Server.whichmovie_app">
-    <configuration name="whichfilm_platform" type="Python.DjangoServer" factoryName="Django server">
-      <module name="whichfilm_platform" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="launchJavascriptDebuger" value="false" />
-      <option name="port" value="8000" />
-      <option name="host" value="" />
-      <option name="additionalOptions" value="" />
-      <option name="browserUrl" value="" />
-      <option name="runTestServer" value="false" />
-      <option name="runNoReload" value="false" />
-      <option name="useCustomRunCommand" value="false" />
-      <option name="customRunCommand" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="whichmovie_app" type="Python.DjangoServer" factoryName="Django server">
+}</component>
+  <component name="RunManager">
+    <configuration name="whichmovie_app" type="Python.DjangoServer" factoryName="Django server" activateToolWindowBeforeRun="false">
       <module name="whichmovie_app" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -108,11 +102,10 @@
         <env name="DJANGO_SETTINGS_MODULE" value="whichmovie.settings" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="SDK_NAME" value="Python 3.13 virtualenv at ~/Documents/repos_mb/venv" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/venv" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="false" />
+      <option name="ADD_SOURCE_ROOTS" value="false" />
       <option name="launchJavascriptDebuger" value="false" />
       <option name="port" value="8001" />
       <option name="host" value="" />
@@ -124,10 +117,6 @@
       <option name="customRunCommand" value="" />
       <method v="2" />
     </configuration>
-    <list>
-      <item itemvalue="Django Server.whichfilm_platform" />
-      <item itemvalue="Django Server.whichmovie_app" />
-    </list>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -148,7 +137,11 @@
       <workItem from="1761812470521" duration="598000" />
       <workItem from="1761825201010" duration="6000" />
       <workItem from="1761907792422" duration="4414000" />
-      <workItem from="1761915872409" duration="9201000" />
+      <workItem from="1761915872409" duration="9285000" />
+      <workItem from="1761927134983" duration="8265000" />
+      <workItem from="1762095135163" duration="9000" />
+      <workItem from="1762095282962" duration="6572000" />
+      <workItem from="1762439119751" duration="5394000" />
     </task>
     <task id="LOCAL-00001" summary="Fix - Removed whichfilm app">
       <option name="closed" value="true" />
@@ -302,7 +295,15 @@
       <option name="project" value="LOCAL" />
       <updated>1761924707995</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="feat: Enhance YouTube video fetching with MubiClient integration and refactor fetching logic">
+      <option name="closed" value="true" />
+      <created>1761925354187</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1761925354187</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -328,14 +329,15 @@
     <MESSAGE value="feat: Update header title and remove duplicate title in movie list" />
     <MESSAGE value="feat: Refactor YouTube API client to support multiple channel clients and improve title extraction" />
     <MESSAGE value="feat: Add RottenTomatoesClient and MubiClient to YouTube data source integration" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: Add RottenTomatoesClient and MubiClient to YouTube data source integration" />
+    <MESSAGE value="feat: Enhance YouTube video fetching with MubiClient integration and refactor fetching logic" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: Enhance YouTube video fetching with MubiClient integration and refactor fetching logic" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="NONE" type="python-line">
           <url>file://$PROJECT_DIR$/movies/tasks.py</url>
-          <line>14</line>
+          <line>13</line>
           <log-expression expression="logger.info(f&quot;[UPDATED] {video['title']} ({video['year']})&quot;)&#10;&#10;        logger.info(f&quot;Task completed: {created_count} new, {updated_count} updated&quot;)&#10;&#10;    except Exception as e:&#10;        logger.error(f&quot;Error fetching YouTube videos: {e}&quot;, exc_info=True)&#10;        raise" language="Python" />
           <option name="timeStamp" value="1" />
         </line-breakpoint>

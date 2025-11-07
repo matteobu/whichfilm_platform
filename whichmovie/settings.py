@@ -38,12 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
     'django_dramatiq',
     'dramatiq_crontab',
-    'movies',
-    'festivals',
     'rest_framework',
+
+    'movies',
 ]
 
 MIDDLEWARE = [

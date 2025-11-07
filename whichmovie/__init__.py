@@ -13,4 +13,3 @@ def ready():
 
     # Import all tasks from apps to register them with Dramatiq
     from movies import tasks as movies_tasks  # noqa
-    from festivals import tasks as festivals_tasks  # noqa

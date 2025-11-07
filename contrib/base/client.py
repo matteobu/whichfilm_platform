@@ -6,7 +6,6 @@ from abc import ABC, abstractmethod
 class BaseClient(ABC):
     """
     Abstract base class for all external service clients.
-
     Subclasses should implement the specific API interaction logic.
     """
 

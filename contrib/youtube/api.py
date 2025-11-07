@@ -1,10 +1,8 @@
 """YouTube API client for fetching video information from multiple channels."""
 
 import re
-import requests
-import xml.etree.ElementTree as ET
-from urllib.parse import urlparse, parse_qs
 import logging
+from yt_dlp import YoutubeDL
 
 from contrib.base import BaseClient, ValidationError, NetworkError
 
@@ -15,108 +13,80 @@ class YouTubeBaseClient(BaseClient):
     """
     Base class for YouTube channel clients.
 
-    Provides common functionality for fetching and parsing RSS feeds from YouTube channels.
+    Provides common functionality for fetching videos from YouTube channels using yt-dlp.
     Subclasses override _clean_title() to handle channel-specific title formats.
     """
 
-    BASE_RSS_URL = "https://www.youtube.com/feeds/videos.xml?channel_id={}"
-    CHANNEL_ID = None  # Override in subclasses
-    NAMESPACES = {
-        'atom': 'http://www.w3.org/2005/Atom',
-        'media': 'http://search.yahoo.com/mrss/'
-    }
+    CHANNEL_URL = None  # Override in subclasses - should be the channel URL (e.g., https://www.youtube.com/@channelname)
+    CHANNEL_ID = None  # Override in subclasses - for backward compatibility
 
     def __init__(self):
         """Initialize YouTube base client."""
-        if not self.CHANNEL_ID:
-            raise ValidationError("CHANNEL_ID must be defined in subclass")
-        self.channel_id = self.CHANNEL_ID
+        if not self.CHANNEL_URL and not self.CHANNEL_ID:
+            raise ValidationError("CHANNEL_URL or CHANNEL_ID must be defined in subclass")
         super().__init__()
 
     def _validate_config(self):
         """Validate that the client is properly configured."""
-        if not self.channel_id:
-            raise ValidationError("YouTube channel_id is required")
+        if not self.CHANNEL_URL and not self.CHANNEL_ID:
+            raise ValidationError("YouTube CHANNEL_URL or CHANNEL_ID is required")
 
-    def _build_rss_url(self):
+    def _get_channel_url(self):
         """
-        Build the YouTube RSS feed URL for the channel.
+        Get the channel URL for yt-dlp extraction.
 
         Returns:
-            str: The full RSS feed URL
+            str: The channel URL to extract videos from
         """
-        return self.BASE_RSS_URL.format(self.channel_id)
+        if self.CHANNEL_URL:
+            return self.CHANNEL_URL
+        # Fallback: construct URL from channel ID if only ID is provided
+        return f"https://www.youtube.com/channel/{self.CHANNEL_ID}"
 
-    def _fetch_rss(self):
+    def _fetch_videos(self):
         """
-        Fetch the RSS feed from YouTube.
+        Fetch videos from YouTube channel using yt-dlp.
 
         Returns:
-            str: The XML content
+            list: List of dictionaries with video data
 
         Raises:
             NetworkError: If the request fails
         """
         try:
-            url = self._build_rss_url()
-            response = requests.get(url, timeout=10)
-            response.raise_for_status()
-            return response.text
-        except requests.exceptions.RequestException as e:
-            raise NetworkError(f"Error fetching YouTube RSS: {e}") from e
+            channel_url = self._get_channel_url()
+            logger.debug(f"Fetching videos from: {channel_url}")
 
-    def _parse_rss(self, xml_content):
-        """
-        Parse the RSS feed XML and extract video data.
+            ydl_opts = {
+                'extract_flat': 'in_playlist',
+                'quiet': False,
+                'no_warnings': False,
+                'socket_timeout': 30,
+            }
 
-        Args:
-            xml_content (str): The raw XML content from YouTube
+            with YoutubeDL(ydl_opts) as ydl:
+                result = ydl.extract_info(channel_url, download=False)
 
-        Returns:
-            list: List of dictionaries with video data
-        """
-        try:
-            root = ET.fromstring(xml_content)
-            namespaces = self.NAMESPACES
-            entries = root.findall('atom:entry', namespaces)
+            if not result or 'entries' not in result:
+                raise NetworkError("No videos found in channel")
 
             videos = []
-            for entry in entries:
-                title_elem = entry.find('atom:title', namespaces)
-                description_elem = entry.find('atom:summary', namespaces)
-                published_elem = entry.find('atom:published', namespaces)
-                link_elem = entry.find('atom:link', namespaces)
-                thumbnail_elem = entry.find('media:thumbnail', namespaces)
-
+            for entry in result['entries']:
                 video = {
-                    'title': title_elem.text if title_elem is not None else '',
-                    'description': description_elem.text if description_elem is not None else '',
-                    'published': published_elem.text if published_elem is not None else '',
-                    'video_url': link_elem.get('href') if link_elem is not None else '',
-                    'thumbnail': thumbnail_elem.get('url') if thumbnail_elem is not None else '',
+                    'title': entry.get('title', ''),
+                    'description': entry.get('description', ''),
+                    'published': entry.get('upload_date', ''),
+                    'video_url': entry.get('url', ''),
+                    'video_id': entry.get('id', ''),
+                    'thumbnail': entry.get('thumbnail', ''),
                 }
                 videos.append(video)
+
+            logger.debug(f"Fetched {len(videos)} videos from channel")
             return videos
-        except ET.ParseError as e:
-            raise ValidationError(f"Error parsing YouTube RSS XML: {e}") from e
 
-    def _extract_video_id(self, video_url):
-        """
-        Extract video ID from YouTube URL.
-
-        Args:
-            video_url (str): YouTube video URL
-
-        Returns:
-            str: Video ID, or empty string if extraction fails
-        """
-        try:
-            parsed_url = urlparse(video_url)
-            video_id = parse_qs(parsed_url.query).get('v', [None])[0]
-            return video_id if video_id else ''
         except Exception as e:
-            logger.error(f"Error extracting video ID: {e}")
-            return ''
+            raise NetworkError(f"Error fetching YouTube videos: {e}") from e
 
     def _extract_year(self, title):
         """
@@ -133,27 +103,12 @@ class YouTubeBaseClient(BaseClient):
             return int(match.group(1))
         return None
 
-    def _clean_title(self, title):
-        """
-        Clean and extract movie title from video title.
-
-        This method should be overridden by subclasses to handle
-        channel-specific title formats.
-
-        Args:
-            title (str): Raw video title
-
-        Returns:
-            str or None: Cleaned movie title, or None if invalid format
-        """
-        raise NotImplementedError("Subclasses must implement _clean_title()")
-
     def _extract_title_and_id(self, videos):
         """
         Extract title, year, and video_id from parsed videos.
 
         Args:
-            videos (list): List of video dicts with title, video_url, etc.
+            videos (list): List of video dicts with title, video_id, etc.
 
         Returns:
             list: List of dicts with cleaned title, year, original_title, and video_id
@@ -172,8 +127,8 @@ class YouTubeBaseClient(BaseClient):
             # Extract year
             year = self._extract_year(original_title)
 
-            # Extract video ID
-            video_id = self._extract_video_id(video['video_url'])
+            # Video ID is already extracted by yt-dlp
+            video_id = video.get('video_id', '')
 
             processed.append({
                 'title': cleaned_title,
@@ -194,8 +149,7 @@ class YouTubeBaseClient(BaseClient):
             NetworkError: If fetching fails
             ValidationError: If parsing fails
         """
-        xml_content = self._fetch_rss()
-        videos = self._parse_rss(xml_content)
+        videos = self._fetch_videos()
         processed_videos = self._extract_title_and_id(videos)
         return processed_videos
 
@@ -208,13 +162,14 @@ class RottenTomatoesClient(YouTubeBaseClient):
     Only processes official trailers (Trailer #), skips teasers.
     """
 
-    CHANNEL_ID = "UCLyYEq4ODlw3OD9qhGqwimw"
+    CHANNEL_URL = "https://www.youtube.com/@RottenTomatoesIndie/videos"
+    CHANNEL_ID = "UCLyYEq4ODlw3OD9qhGqwimw"  # Fallback for backward compatibility
 
     def _clean_title(self, title):
         """
         Extract movie title from RottenTomatoes trailer format.
 
-        Format: "Movie Title Trailer #1 (2025)" → "Movie Title"
+        Format: "Movie Title Official Trailer #1 (2025)" → "Movie Title"
         Skips teaser trailers (no Trailer # pattern).
 
         Args:
@@ -227,8 +182,9 @@ class RottenTomatoesClient(YouTubeBaseClient):
         if 'Trailer #' not in title:
             return None
 
-        # Extract everything before "Trailer #"
-        match = re.match(r'^(.+?)\s+Trailer\s+#', title)
+        # Extract everything before "Official Trailer #" or just "Trailer #"
+        # Pattern matches: "Title Official Trailer #" or "Title Trailer #"
+        match = re.match(r'^(.+?)\s+(?:Official\s+)?Trailer\s+#', title)
 
         if match:
             cleaned = match.group(1).strip()
@@ -249,7 +205,8 @@ class MubiClient(YouTubeBaseClient):
     Override _clean_title() with Mubi-specific parsing logic.
     """
 
-    CHANNEL_ID = "UCb6-VM5UQ4Czj_d3m9EPGfg"
+    CHANNEL_URL = "https://www.youtube.com/@mubi/videos"
+    CHANNEL_ID = "UCb6-VM5UQ4Czj_d3m9EPGfg"  # Fallback for backward compatibility
 
     def _clean_title(self, title):
         """
@@ -264,21 +221,26 @@ class MubiClient(YouTubeBaseClient):
         Returns:
             str or None: Cleaned title, or None if invalid format
         """
+        logger.debug(f"[MubiClient] Raw title: {title}")
+
         # Exclude teasers and "Coming Soon"
         if 'Official Teaser' in title or 'Coming Soon' in title:
+            logger.debug(f"[MubiClient] Skipped (teaser/coming soon): {title}")
             return None
 
         # Only process if it has "Official Trailer"
         if 'Official Trailer' not in title:
+            logger.debug(f"[MubiClient] Skipped (no 'Official Trailer'): {title}")
             return None
 
         # Extract everything before "Official Trailer" (remove pipes and whitespace)
         match = re.match(r'^(.+?)\s*\|\s*Official Trailer', title)
-
         if match:
             cleaned = match.group(1).strip()
+            logger.debug(f"[MubiClient] Extracted title: {cleaned}")
             return cleaned if cleaned else None
 
+        logger.debug(f"[MubiClient] Regex failed to match: {title}")
         return None
 
     def get_videos(self):

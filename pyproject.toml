@@ -1,0 +1,81 @@
+[project]
+name = "whichmovie-app"
+version = "1.0.0"
+description = "WhichMovie - movie tracker"
+requires-python = ">=3.10"
+dependencies = [
+    "django>=5.2.4",
+    "djangorestframework>=3.14.0",
+    "django-dramatiq>=0.13.0",
+    "dramatiq[redis,watch]>=1.18.0",
+    "dramatiq-crontab>=1.0.11",
+    "redis[hiredis]>=5.0.0",
+    "yt-dlp>=2024.1.1",
+    "requests>=2.31.0",
+    "python-decouple>=3.8",
+    "psycopg[binary]>=3.1.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest-django>=4.11.0",
+    "pytest-cov>=6.0.0",
+    "pytest-randomly>=3.14.0",
+    "pytest-pretty>=1.2.0",
+    "model-bakery>=1.20.0",
+    "pytest-asyncio>=0.24.0",
+    "pytest-env>=1.1.0",
+    "pre-commit>=3.6.0",
+]
+
+[tool.uv]
+default-groups = ["dev"]
+
+[tool.pytest.ini_options]
+addopts = ["--tb=short"]
+DJANGO_SETTINGS_MODULE = "whichmovie.settings"
+norecursedirs = ["media", ".venv", "node_modules", ".direnv", ".git", "venv"]
+filterwarnings = ["ignore::PendingDeprecationWarning"]
+python_files = ["tests.py", "test_*.py", "*_tests.py"]
+testpaths = ["contrib", "movies"]
+env = [
+    "TEST=1",
+]
+
+[tool.coverage.run]
+branch = true
+omit = [
+    ".venv/*",
+    "*/tests/*",
+    "*/migrations/*",
+    "manage.py",
+    "conftest.py",
+    "*/baker_recipes.py",
+    "node_modules/*",
+    ".github/*",
+    "docs/*",
+    "*.md",
+]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
+skip_empty = true
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+    "F",    # pyflakes
+    "I",    # isort
+    "S",    # flake8-bandit
+    "UP",   # pyupgrade
+    "B",    # flake8-bugbear
+]
+ignore = [
+    "E501",  # line too long (let formatter handle it)
+]
+
+[tool.ruff.lint.per-file-ignores]
+"*/tests/**/test_*.py" = ["S"]
+"*/**/migrations/*.py" = ["S"]

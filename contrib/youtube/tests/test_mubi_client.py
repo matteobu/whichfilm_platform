@@ -61,6 +61,62 @@ class TestMubiClientFetchVideos:
         assert result[2]['video_id'] == 'mubi_skip123'
 
 
+class TestMubiClientExtractTitleAndId:
+    """Test suite for MubiClient._extract_title_and_id() method."""
+
+    def test_extract_title_and_id__filters_teasers(self):
+        """Test that _extract_title_and_id filters out teaser videos."""
+        client = MubiClient()
+
+        # Raw videos from API (3 videos, 1 is teaser)
+        raw_videos = [
+            {
+                'title': 'DUNE | Official Trailer #1',
+                'video_id': 'mubi_abc123',
+                'description': 'Sci-fi epic'
+            },
+            {
+                'title': 'BLADE RUNNER 2049 | Official Trailer | In Cinemas Now',
+                'video_id': 'mubi_xyz789',
+                'description': 'Sci-fi masterpiece'
+            },
+            {
+                'title': 'OPPENHEIMER | Official Teaser (2023)',
+                'video_id': 'mubi_skip123',
+                'description': 'Teaser (should be skipped)'
+            }
+        ]
+
+        result = client._extract_title_and_id(raw_videos)
+
+        # Should only return 2 (teaser filtered out!)
+        assert len(result) == 2
+        assert result[0]['title'] == "DUNE"
+        assert result[0]['video_id'] == 'mubi_abc123'
+        assert result[1]['title'] == "BLADE RUNNER 2049"
+        assert result[1]['video_id'] == 'mubi_xyz789'
+        assert result[1]['year'] is None  # No year in title
+
+    def test_extract_title_and_id__preserves_original_title(self):
+        """Test that original title is preserved in output."""
+        client = MubiClient()
+
+        raw_videos = [
+            {
+                'title': 'ARRIVAL | Official Trailer #1',
+                'video_id': 'mubi_vid123',
+                'description': 'Sci-fi drama'
+            }
+        ]
+
+        result = client._extract_title_and_id(raw_videos)
+
+        assert len(result) == 1
+        assert result[0]['title'] == "ARRIVAL"
+        assert result[0]['original_title'] == "ARRIVAL | Official Trailer #1"
+        assert result[0]['video_id'] == 'mubi_vid123'
+
+
 class TestMubiClientGetData:
     """Test suite for MubiClient.get_data() - full integration tests."""
 

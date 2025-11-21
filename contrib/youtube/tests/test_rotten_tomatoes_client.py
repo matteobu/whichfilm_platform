@@ -61,6 +61,63 @@ class TestRottenTomatoesClientFetchVideos:
         assert result[2]['video_id'] == 'skip123'
 
 
+class TestRottenTomatoesClientExtractTitleAndId:
+    """Test suite for RottenTomatoesClient._extract_title_and_id() method."""
+
+    def test_extract_title_and_id__filters_teasers(self):
+        """Test that _extract_title_and_id filters out teaser videos."""
+        client = RottenTomatoesClient()
+
+        # Raw videos from API (3 videos, 1 is teaser)
+        raw_videos = [
+            {
+                'title': 'The Lord of the Rings Official Trailer #1 (2025)',
+                'video_id': 'abc123',
+                'description': 'Official trailer'
+            },
+            {
+                'title': 'Dune Part Two Official Trailer #1 (2024)',
+                'video_id': 'xyz789',
+                'description': 'Sci-fi epic'
+            },
+            {
+                'title': 'Avatar Official Teaser (2025)',
+                'video_id': 'skip123',
+                'description': 'Teaser (should be skipped)'
+            }
+        ]
+
+        result = client._extract_title_and_id(raw_videos)
+
+        # Should only return 2 (teaser filtered out!)
+        assert len(result) == 2
+        assert result[0]['title'] == "The Lord of the Rings"
+        assert result[0]['video_id'] == 'abc123'
+        assert result[0]['year'] == 2025
+        assert result[1]['title'] == "Dune Part Two"
+        assert result[1]['video_id'] == 'xyz789'
+        assert result[1]['year'] == 2024
+
+    def test_extract_title_and_id__preserves_original_title(self):
+        """Test that original title is preserved in output."""
+        client = RottenTomatoesClient()
+
+        raw_videos = [
+            {
+                'title': 'Inception Official Trailer #2 (2010)',
+                'video_id': 'vid123',
+                'description': 'Dream thriller'
+            }
+        ]
+
+        result = client._extract_title_and_id(raw_videos)
+
+        assert len(result) == 1
+        assert result[0]['title'] == "Inception"
+        assert result[0]['original_title'] == "Inception Official Trailer #2 (2010)"
+        assert result[0]['year'] == 2010
+
+
 class TestRottenTomatoesClientGetData:
     """Test suite for RottenTomatoesClient.get_data() - full integration tests."""
 

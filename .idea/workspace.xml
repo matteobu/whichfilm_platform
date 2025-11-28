@@ -4,17 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8baee565-f4d4-42d2-8a7c-e23bdb07e1ae" name="Changes" comment="feat: Add technical documentation and testing guide for WhichMovie app">
+    <list default="true" id="8baee565-f4d4-42d2-8a7c-e23bdb07e1ae" name="Changes" comment="feat: Add comprehensive README documentation for WhichMovie project setup and configuration">
+      <change afterPath="$PROJECT_DIR$/movies/tests/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/01_platform_overview.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/02_django_basics.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/03_entry_point.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/04_url_routing.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/05_views.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/06_models.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/15_dramatiq_tasks.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/19_data_flow.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/movies/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/movies/tests/tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movies/tests_models.py" beforeDir="false" afterPath="$PROJECT_DIR$/movies/tests/tests_models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movies/tests_tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/movies/tests/tests_tasks.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,6 +79,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/movies/tests" />
       <recent name="$PROJECT_DIR$/contrib/youtube/tests/RottenTomatoesClient" />
       <recent name="$PROJECT_DIR$/contrib/youtube/tests/MubiClient" />
     </key>
@@ -171,7 +167,7 @@
       <workItem from="1763729816934" duration="9503000" />
       <workItem from="1763973494087" duration="654000" />
       <workItem from="1764230855351" duration="245000" />
-      <workItem from="1764331372891" duration="1146000" />
+      <workItem from="1764331372891" duration="5533000" />
     </task>
     <task id="LOCAL-00001" summary="Fix - Removed whichfilm app">
       <option name="closed" value="true" />
@@ -389,7 +385,31 @@
       <option name="project" value="LOCAL" />
       <updated>1763739483264</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="feat: Add technical documentation and testing guide for WhichMovie app">
+      <option name="closed" value="true" />
+      <created>1764332550690</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1764332550690</updated>
+    </task>
+    <task id="LOCAL-00029" summary="feat: Add comprehensive code implementation guide for Movies app in README">
+      <option name="closed" value="true" />
+      <created>1764332557428</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1764332557428</updated>
+    </task>
+    <task id="LOCAL-00030" summary="feat: Add comprehensive README documentation for WhichMovie project setup and configuration">
+      <option name="closed" value="true" />
+      <created>1764333038298</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1764333038298</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -407,8 +427,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fix - Youtube Service to get info from YT channel" />
-    <MESSAGE value="Fix - Update the DB Table to a more generic" />
     <MESSAGE value="Refactor(integrations): Move to clients/ folder following Django best practices" />
     <MESSAGE value="refactor: Rename Django project folder from whichfilm_platform to whichfilm" />
     <MESSAGE value="fix: Update Django settings module from whichfilm to whichmovie" />
@@ -432,7 +450,9 @@
     <MESSAGE value="feat: Add mocked yt-dlp response fixtures for MubiClient and RottenTomatoesClient tests" />
     <MESSAGE value="feat: Add test suites for MubiClient and RottenTomatoesClient title extraction methods" />
     <MESSAGE value="feat: Add technical documentation and testing guide for WhichMovie app" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: Add technical documentation and testing guide for WhichMovie app" />
+    <MESSAGE value="feat: Add comprehensive code implementation guide for Movies app in README" />
+    <MESSAGE value="feat: Add comprehensive README documentation for WhichMovie project setup and configuration" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: Add comprehensive README documentation for WhichMovie project setup and configuration" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

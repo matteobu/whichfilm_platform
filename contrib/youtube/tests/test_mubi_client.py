@@ -18,29 +18,19 @@ class TestMubiClientCleanTitle:
         """Fixture: MubiClient instance for testing."""
         return MubiClient()
 
-    def test_clean_title__extracts_movie_name(self, client):
-        """Test that _clean_title removes trailer format."""
-        result = client._clean_title("DUNE | Official Trailer #1")
-
-        assert result == "DUNE"
-
-    def test_clean_title__with_in_cinemas_now(self, client):
-        """Test title with 'In Cinemas Now' suffix."""
-        result = client._clean_title("BLADE RUNNER 2049 | Official Trailer | In Cinemas Now")
-
-        assert result == "BLADE RUNNER 2049"
-
-    def test_clean_title__skips_teaser(self, client):
-        """Test that teasers return None (should be skipped)."""
-        result = client._clean_title("OPPENHEIMER | Official Teaser (2023)")
-
-        assert result is None
-
-    def test_clean_title__no_official_trailer_pattern(self, client):
-        """Test title without official trailer pattern returns None."""
-        result = client._clean_title("Random YouTube Video Title")
-
-        assert result is None
+    @pytest.mark.parametrize(
+        "input_title,expected_output",
+        [
+            ("DUNE | Official Trailer #1", "DUNE"),
+            ("BLADE RUNNER 2049 | Official Trailer | In Cinemas Now", "BLADE RUNNER 2049"),
+            ("OPPENHEIMER | Official Teaser (2023)", None),
+            ("Random YouTube Video Title", None),
+        ],
+    )
+    def test_clean_title(self, client, input_title, expected_output):
+        """Test _clean_title with various input formats."""
+        result = client._clean_title(input_title)
+        assert result == expected_output
 
 
 class TestMubiClientFetchVideos:
@@ -66,53 +56,47 @@ class TestMubiClientExtractTitleAndId:
         """Fixture: MubiClient instance for testing."""
         return MubiClient()
 
-    def test_extract_title_and_id__filters_teasers(self, client):
-        """Test that _extract_title_and_id filters out teaser videos."""
-        # Raw videos from API (3 videos, 1 is teaser)
-        raw_videos = [
-            {
-                'title': 'DUNE | Official Trailer #1',
-                'video_id': 'mubi_abc123',
-                'description': 'Sci-fi epic'
-            },
-            {
-                'title': 'BLADE RUNNER 2049 | Official Trailer | In Cinemas Now',
-                'video_id': 'mubi_xyz789',
-                'description': 'Sci-fi masterpiece'
-            },
-            {
-                'title': 'OPPENHEIMER | Official Teaser (2023)',
-                'video_id': 'mubi_skip123',
-                'description': 'Teaser (should be skipped)'
-            }
-        ]
-
+    @pytest.mark.parametrize(
+        "raw_videos,expected_count,expected_titles",
+        [
+            (
+                # Filters teasers
+                [
+                    {'title': 'DUNE | Official Trailer #1', 'video_id': 'mubi_abc123', 'description': 'Sci-fi epic'},
+                    {'title': 'BLADE RUNNER 2049 | Official Trailer | In Cinemas Now', 'video_id': 'mubi_xyz789', 'description': 'Sci-fi masterpiece'},
+                    {'title': 'OPPENHEIMER | Official Teaser (2023)', 'video_id': 'mubi_skip123', 'description': 'Teaser (should be skipped)'},
+                ],
+                2,
+                ["DUNE", "BLADE RUNNER 2049"],
+            ),
+            (
+                # Preserves original title
+                [
+                    {'title': 'ARRIVAL | Official Trailer #1', 'video_id': 'mubi_vid123', 'description': 'Sci-fi drama'},
+                ],
+                1,
+                ["ARRIVAL"],
+            ),
+        ],
+    )
+    def test_extract_title_and_id(self, client, raw_videos, expected_count, expected_titles):
+        """Test _extract_title_and_id with various video lists."""
         result = client._extract_title_and_id(raw_videos)
 
-        # Should only return 2 (teaser filtered out!)
-        assert len(result) == 2
-        assert result[0]['title'] == "DUNE"
-        assert result[0]['video_id'] == 'mubi_abc123'
-        assert result[1]['title'] == "BLADE RUNNER 2049"
-        assert result[1]['video_id'] == 'mubi_xyz789'
-        assert result[1]['year'] is None  # No year in title
+        assert len(result) == expected_count
+        for i, expected_title in enumerate(expected_titles):
+            assert result[i]['title'] == expected_title
 
-    def test_extract_title_and_id__preserves_original_title(self, client):
-        """Test that original title is preserved in output."""
-        raw_videos = [
-            {
-                'title': 'ARRIVAL | Official Trailer #1',
-                'video_id': 'mubi_vid123',
-                'description': 'Sci-fi drama'
-            }
-        ]
+        # Additional checks for first test case (filters teasers)
+        if expected_count == 2:
+            assert result[0]['video_id'] == 'mubi_abc123'
+            assert result[1]['video_id'] == 'mubi_xyz789'
+            assert result[1]['year'] is None
 
-        result = client._extract_title_and_id(raw_videos)
-
-        assert len(result) == 1
-        assert result[0]['title'] == "ARRIVAL"
-        assert result[0]['original_title'] == "ARRIVAL | Official Trailer #1"
-        assert result[0]['video_id'] == 'mubi_vid123'
+        # Additional checks for second test case (preserves original title)
+        if expected_count == 1 and expected_titles[0] == "ARRIVAL":
+            assert result[0]['original_title'] == "ARRIVAL | Official Trailer #1"
+            assert result[0]['video_id'] == 'mubi_vid123'
 
 
 class TestMubiClientGetData:

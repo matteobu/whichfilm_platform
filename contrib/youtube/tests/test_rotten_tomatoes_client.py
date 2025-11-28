@@ -13,37 +13,20 @@ from contrib.youtube.api import RottenTomatoesClient
 class TestRottenTomatoesClientCleanTitle:
     """Test suite for RottenTomatoesClient._clean_title() method."""
 
-    def test_clean_title__extracts_movie_name(self):
-        """Test that _clean_title removes trailer format and year."""
+    @pytest.mark.parametrize(
+        "input_title,expected_output",
+        [
+            ("The Lord of the Rings Official Trailer #1 (2025)", "The Lord of the Rings"),
+            ("Dune Part Two Official Trailer #1 (2024)", "Dune Part Two"),
+            ("Avatar Official Teaser (2025)", None),
+            ("Random YouTube Video Title", None),
+        ],
+    )
+    def test_clean_title(self, input_title, expected_output):
+        """Test _clean_title with various input formats."""
         client = RottenTomatoesClient()
-
-        result = client._clean_title("The Lord of the Rings Official Trailer #1 (2025)")
-
-        assert result == "The Lord of the Rings"
-
-    def test_clean_title__with_multiple_words(self):
-        """Test title with multiple words."""
-        client = RottenTomatoesClient()
-
-        result = client._clean_title("Dune Part Two Official Trailer #1 (2024)")
-
-        assert result == "Dune Part Two"
-
-    def test_clean_title__skips_teaser(self):
-        """Test that teasers return None (should be skipped)."""
-        client = RottenTomatoesClient()
-
-        result = client._clean_title("Avatar Official Teaser (2025)")
-
-        assert result is None
-
-    def test_clean_title__no_trailer_pattern(self):
-        """Test title without trailer pattern returns None."""
-        client = RottenTomatoesClient()
-
-        result = client._clean_title("Random YouTube Video Title")
-
-        assert result is None
+        result = client._clean_title(input_title)
+        assert result == expected_output
 
 
 class TestRottenTomatoesClientFetchVideos:
@@ -64,58 +47,43 @@ class TestRottenTomatoesClientFetchVideos:
 class TestRottenTomatoesClientExtractTitleAndId:
     """Test suite for RottenTomatoesClient._extract_title_and_id() method."""
 
-    def test_extract_title_and_id__filters_teasers(self):
-        """Test that _extract_title_and_id filters out teaser videos."""
+    @pytest.mark.parametrize(
+        "raw_videos,expected_count,expected_data",
+        [
+            (
+                # Filters teasers
+                [
+                    {'title': 'The Lord of the Rings Official Trailer #1 (2025)', 'video_id': 'abc123', 'description': 'Official trailer'},
+                    {'title': 'Dune Part Two Official Trailer #1 (2024)', 'video_id': 'xyz789', 'description': 'Sci-fi epic'},
+                    {'title': 'Avatar Official Teaser (2025)', 'video_id': 'skip123', 'description': 'Teaser (should be skipped)'},
+                ],
+                2,
+                [
+                    {'title': "The Lord of the Rings", 'video_id': 'abc123', 'year': 2025},
+                    {'title': "Dune Part Two", 'video_id': 'xyz789', 'year': 2024},
+                ],
+            ),
+            (
+                # Preserves original title
+                [
+                    {'title': 'Inception Official Trailer #2 (2010)', 'video_id': 'vid123', 'description': 'Dream thriller'},
+                ],
+                1,
+                [
+                    {'title': "Inception", 'original_title': "Inception Official Trailer #2 (2010)", 'year': 2010},
+                ],
+            ),
+        ],
+    )
+    def test_extract_title_and_id(self, raw_videos, expected_count, expected_data):
+        """Test _extract_title_and_id with various video lists."""
         client = RottenTomatoesClient()
-
-        # Raw videos from API (3 videos, 1 is teaser)
-        raw_videos = [
-            {
-                'title': 'The Lord of the Rings Official Trailer #1 (2025)',
-                'video_id': 'abc123',
-                'description': 'Official trailer'
-            },
-            {
-                'title': 'Dune Part Two Official Trailer #1 (2024)',
-                'video_id': 'xyz789',
-                'description': 'Sci-fi epic'
-            },
-            {
-                'title': 'Avatar Official Teaser (2025)',
-                'video_id': 'skip123',
-                'description': 'Teaser (should be skipped)'
-            }
-        ]
-
         result = client._extract_title_and_id(raw_videos)
 
-        # Should only return 2 (teaser filtered out!)
-        assert len(result) == 2
-        assert result[0]['title'] == "The Lord of the Rings"
-        assert result[0]['video_id'] == 'abc123'
-        assert result[0]['year'] == 2025
-        assert result[1]['title'] == "Dune Part Two"
-        assert result[1]['video_id'] == 'xyz789'
-        assert result[1]['year'] == 2024
-
-    def test_extract_title_and_id__preserves_original_title(self):
-        """Test that original title is preserved in output."""
-        client = RottenTomatoesClient()
-
-        raw_videos = [
-            {
-                'title': 'Inception Official Trailer #2 (2010)',
-                'video_id': 'vid123',
-                'description': 'Dream thriller'
-            }
-        ]
-
-        result = client._extract_title_and_id(raw_videos)
-
-        assert len(result) == 1
-        assert result[0]['title'] == "Inception"
-        assert result[0]['original_title'] == "Inception Official Trailer #2 (2010)"
-        assert result[0]['year'] == 2010
+        assert len(result) == expected_count
+        for i, expected in enumerate(expected_data):
+            for key, value in expected.items():
+                assert result[i][key] == value
 
 
 class TestRottenTomatoesClientGetData:

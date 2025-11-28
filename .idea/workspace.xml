@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8baee565-f4d4-42d2-8a7c-e23bdb07e1ae" name="Changes" comment="feat: Add comprehensive README documentation for WhichMovie project setup and configuration">
-      <change afterPath="$PROJECT_DIR$/movies/tests/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/movies/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/movies/tests/tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/movies/tests_models.py" beforeDir="false" afterPath="$PROJECT_DIR$/movies/tests/tests_models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/movies/tests_tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/movies/tests/tests_tasks.py" afterDir="false" />
+    <list default="true" id="8baee565-f4d4-42d2-8a7c-e23bdb07e1ae" name="Changes" comment="feat: Refactor test files and update workspace configuration">
+      <change beforePath="$PROJECT_DIR$/contrib/youtube/tests/test_mubi_client.py" beforeDir="false" afterPath="$PROJECT_DIR$/contrib/youtube/tests/test_mubi_client.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contrib/youtube/tests/test_rotten_tomatoes_client.py" beforeDir="false" afterPath="$PROJECT_DIR$/contrib/youtube/tests/test_rotten_tomatoes_client.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -167,7 +164,7 @@
       <workItem from="1763729816934" duration="9503000" />
       <workItem from="1763973494087" duration="654000" />
       <workItem from="1764230855351" duration="245000" />
-      <workItem from="1764331372891" duration="5533000" />
+      <workItem from="1764331372891" duration="5978000" />
     </task>
     <task id="LOCAL-00001" summary="Fix - Removed whichfilm app">
       <option name="closed" value="true" />
@@ -409,7 +406,15 @@
       <option name="project" value="LOCAL" />
       <updated>1764333038298</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="feat: Refactor test files and update workspace configuration">
+      <option name="closed" value="true" />
+      <created>1764337323222</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1764337323222</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -427,7 +432,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Refactor(integrations): Move to clients/ folder following Django best practices" />
     <MESSAGE value="refactor: Rename Django project folder from whichfilm_platform to whichfilm" />
     <MESSAGE value="fix: Update Django settings module from whichfilm to whichmovie" />
     <MESSAGE value="feat: Add initial migration and models for Movie and Film" />
@@ -452,7 +456,8 @@
     <MESSAGE value="feat: Add technical documentation and testing guide for WhichMovie app" />
     <MESSAGE value="feat: Add comprehensive code implementation guide for Movies app in README" />
     <MESSAGE value="feat: Add comprehensive README documentation for WhichMovie project setup and configuration" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: Add comprehensive README documentation for WhichMovie project setup and configuration" />
+    <MESSAGE value="feat: Refactor test files and update workspace configuration" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: Refactor test files and update workspace configuration" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

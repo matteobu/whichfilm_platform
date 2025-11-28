@@ -121,5 +121,110 @@ class TestRottenTomatoesClientExtractTitleAndId:
 class TestRottenTomatoesClientGetData:
     """Test suite for RottenTomatoesClient.get_data() - full integration tests."""
 
-    # TODO: Add integration tests for full pipeline
-    pass
+    def test_get_data__returns_processed_videos(self, rotten_tomatoes_client_mocked):
+        """Test that get_data returns fully processed video list."""
+        result = rotten_tomatoes_client_mocked.get_data()
+
+        # Verify structure
+        assert isinstance(result, list)
+        assert len(result) == 2  # 3 videos, 1 filtered (teaser)
+
+        # Verify first video
+        assert result[0]['title'] == "The Lord of the Rings"
+        assert result[0]['original_title'] == "The Lord of the Rings Official Trailer #1 (2025)"
+        assert result[0]['video_id'] == "abc123"
+        assert result[0]['year'] == 2025
+
+        # Verify second video
+        assert result[1]['title'] == "Dune Part Two"
+        assert result[1]['original_title'] == "Dune Part Two Official Trailer #1 (2024)"
+        assert result[1]['video_id'] == "xyz789"
+        assert result[1]['year'] == 2024
+
+    def test_get_data__filters_teasers(self, rotten_tomatoes_client_mocked):
+        """Test that teaser videos are filtered out."""
+        result = rotten_tomatoes_client_mocked.get_data()
+
+        # Should only have 2 videos (teaser filtered)
+        assert len(result) == 2
+
+        # Verify no teaser in results
+        titles = [v['title'] for v in result]
+        assert "Avatar" not in titles  # Teaser was filtered
+
+    def test_get_data__extracts_all_required_fields(self, rotten_tomatoes_client_mocked):
+        """Test that all required fields are present."""
+        result = rotten_tomatoes_client_mocked.get_data()
+
+        for video in result:
+            # All these fields must exist
+            assert 'title' in video
+            assert 'original_title' in video
+            assert 'video_id' in video
+            assert 'year' in video
+
+            # Verify non-empty values where expected
+            assert video['title'] != ""
+            assert video['original_title'] != ""
+            assert video['video_id'] != ""
+
+    def test_get_data__handles_videos_without_year(self, rotten_tomatoes_client_mocked):
+        """Test handling of videos where year extraction fails."""
+        client = rotten_tomatoes_client_mocked
+        raw_video = [{
+            'title': 'Movie Official Trailer #1',  # No year
+            'video_id': 'test123',
+            'description': 'Test'
+        }]
+
+        result = client._extract_title_and_id(raw_video)
+
+        assert len(result) == 1
+        assert result[0]['title'] == "Movie"
+        assert result[0]['year'] is None  # Year should be None, not fail
+
+    def test_get_data__integration_full_pipeline(self, rotten_tomatoes_client_mocked):
+        """Test the full pipeline: fetch → extract → clean → return."""
+        # This simulates: YoutubeDL → _fetch_videos → _extract_title_and_id → get_data
+        result = rotten_tomatoes_client_mocked.get_data()
+
+        # Should complete without errors
+        assert result is not None
+        assert isinstance(result, list)
+        assert len(result) > 0
+
+        # Each result should be properly processed
+        for video in result:
+            # Should have gone through _clean_title successfully
+            assert "Trailer" not in video['title']
+            assert "Official" not in video['title']
+            # Should still have the raw version
+            assert "Trailer" in video['original_title']
+
+    def test_get_data__preserves_video_order(self, rotten_tomatoes_client_mocked):
+        """Test that videos maintain their original order."""
+        result = rotten_tomatoes_client_mocked.get_data()
+
+        # First video should be Lord of the Rings
+        assert result[0]['title'] == "The Lord of the Rings"
+        # Second should be Dune (teasers filtered out)
+        assert result[1]['title'] == "Dune Part Two"
+
+    def test_get_data__empty_list_returns_empty(self, monkeypatch):
+        """Test that empty YouTube response returns empty list."""
+        from unittest.mock import MagicMock
+
+        mock_instance = MagicMock()
+        mock_instance.extract_info.return_value = {'entries': []}
+        mock_instance.__enter__.return_value = mock_instance
+        mock_instance.__exit__.return_value = None
+
+        monkeypatch.setattr(
+            'contrib.youtube.api.YoutubeDL',
+            lambda *args, **kwargs: mock_instance
+        )
+
+        client = RottenTomatoesClient()
+        result = client.get_data()
+
+        assert result == []

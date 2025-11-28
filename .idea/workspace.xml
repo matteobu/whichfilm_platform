@@ -4,10 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8baee565-f4d4-42d2-8a7c-e23bdb07e1ae" name="Changes" comment="feat: Add mocked yt-dlp response fixtures for MubiClient and RottenTomatoesClient tests">
+    <list default="true" id="8baee565-f4d4-42d2-8a7c-e23bdb07e1ae" name="Changes" comment="feat: Add technical documentation and testing guide for WhichMovie app">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contrib/youtube/tests/test_mubi_client.py" beforeDir="false" afterPath="$PROJECT_DIR$/contrib/youtube/tests/test_mubi_client.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contrib/youtube/tests/test_rotten_tomatoes_client.py" beforeDir="false" afterPath="$PROJECT_DIR$/contrib/youtube/tests/test_rotten_tomatoes_client.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/01_platform_overview.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/02_django_basics.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/03_entry_point.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/04_url_routing.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/05_views.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/06_models.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/15_dramatiq_tasks.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/19_data_flow.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/README.md" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,29 +58,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "DefaultHtmlFileTemplate": "HTML File",
-    "Django Server.whichmovie_app.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Python.python manage.py runserver.executor": "Run",
-    "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "django.template.preview.state": "SHOW_EDITOR_AND_PREVIEW",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "/Users/matteobucciol/Documents/repos_mb/whichmovie_app",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;Django Server.whichmovie_app.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Python.python manage.py runserver.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenDjangoStructureViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;django.template.preview.state&quot;: &quot;SHOW_EDITOR_AND_PREVIEW&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/matteobucciol/Documents/repos_mb/whichmovie_app&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/contrib/youtube/tests/RottenTomatoesClient" />
@@ -160,7 +168,10 @@
       <workItem from="1762095282962" duration="6572000" />
       <workItem from="1762439119751" duration="11646000" />
       <workItem from="1762763751299" duration="14000" />
-      <workItem from="1763729816934" duration="7763000" />
+      <workItem from="1763729816934" duration="9503000" />
+      <workItem from="1763973494087" duration="654000" />
+      <workItem from="1764230855351" duration="245000" />
+      <workItem from="1764331372891" duration="1146000" />
     </task>
     <task id="LOCAL-00001" summary="Fix - Removed whichfilm app">
       <option name="closed" value="true" />
@@ -362,7 +373,23 @@
       <option name="project" value="LOCAL" />
       <updated>1762526278054</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="feat: Add test suites for MubiClient and RottenTomatoesClient title extraction methods">
+      <option name="closed" value="true" />
+      <created>1763739477086</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1763739477086</updated>
+    </task>
+    <task id="LOCAL-00027" summary="feat: Add technical documentation and testing guide for WhichMovie app">
+      <option name="closed" value="true" />
+      <created>1763739483264</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1763739483264</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -380,8 +407,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fix - Removed whichfilm app" />
-    <MESSAGE value="Fix - Create a YT Film Info Models" />
     <MESSAGE value="Fix - Youtube Service to get info from YT channel" />
     <MESSAGE value="Fix - Update the DB Table to a more generic" />
     <MESSAGE value="Refactor(integrations): Move to clients/ folder following Django best practices" />
@@ -405,7 +430,9 @@
     <MESSAGE value="feat: Remove YouTubeClient alias and update references to RottenTomatoesClient in the codebase" />
     <MESSAGE value="feat: Add unit tests for MubiClient methods and structure test suites" />
     <MESSAGE value="feat: Add mocked yt-dlp response fixtures for MubiClient and RottenTomatoesClient tests" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: Add mocked yt-dlp response fixtures for MubiClient and RottenTomatoesClient tests" />
+    <MESSAGE value="feat: Add test suites for MubiClient and RottenTomatoesClient title extraction methods" />
+    <MESSAGE value="feat: Add technical documentation and testing guide for WhichMovie app" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: Add technical documentation and testing guide for WhichMovie app" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

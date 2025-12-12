@@ -4,9 +4,49 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8baee565-f4d4-42d2-8a7c-e23bdb07e1ae" name="Changes" comment="feat: Refactor test files and update workspace configuration">
+    <list default="true" id="8baee565-f4d4-42d2-8a7c-e23bdb07e1ae" name="Changes" comment="refactor: Clean up code formatting and improve consistency across files">
+      <change afterPath="$PROJECT_DIR$/.pre-commit-config.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/whichfilm_platform.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/whichfilm_platform.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contrib/base/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/contrib/base/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contrib/base/exceptions.py" beforeDir="false" afterPath="$PROJECT_DIR$/contrib/base/exceptions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contrib/tmdb/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/contrib/tmdb/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contrib/tmdb/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/contrib/tmdb/api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contrib/tmdb/tests/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/contrib/tmdb/tests/conftest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contrib/tmdb/tests/test_tmdb_client.py" beforeDir="false" afterPath="$PROJECT_DIR$/contrib/tmdb/tests/test_tmdb_client.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contrib/utils/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/contrib/utils/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contrib/utils/decorators.py" beforeDir="false" afterPath="$PROJECT_DIR$/contrib/utils/decorators.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contrib/utils/helpers.py" beforeDir="false" afterPath="$PROJECT_DIR$/contrib/utils/helpers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contrib/utils/rate_limiter.py" beforeDir="false" afterPath="$PROJECT_DIR$/contrib/utils/rate_limiter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contrib/youtube/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/contrib/youtube/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contrib/youtube/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/contrib/youtube/api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contrib/youtube/tests/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/contrib/youtube/tests/conftest.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/contrib/youtube/tests/test_mubi_client.py" beforeDir="false" afterPath="$PROJECT_DIR$/contrib/youtube/tests/test_mubi_client.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/contrib/youtube/tests/test_rotten_tomatoes_client.py" beforeDir="false" afterPath="$PROJECT_DIR$/contrib/youtube/tests/test_rotten_tomatoes_client.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contrib/youtube/tests/test_youtube_integration.py" beforeDir="false" afterPath="$PROJECT_DIR$/contrib/youtube/tests/test_youtube_integration.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manage.py" beforeDir="false" afterPath="$PROJECT_DIR$/manage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movies/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/movies/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movies/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/movies/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movies/migrations/0002_movie_delete_film.py" beforeDir="false" afterPath="$PROJECT_DIR$/movies/migrations/0002_movie_delete_film.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movies/migrations/0003_movie_backdrop_path_movie_overview_movie_poster_path_and_more.py" beforeDir="false" afterPath="$PROJECT_DIR$/movies/migrations/0003_movie_backdrop_path_movie_overview_movie_poster_path_and_more.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movies/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/movies/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movies/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/movies/tasks.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movies/templates/movies/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/movies/templates/movies/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movies/templates/movies/movie_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/movies/templates/movies/movie_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movies/tests/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/movies/tests/tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movies/tests/tests_models.py" beforeDir="false" afterPath="$PROJECT_DIR$/movies/tests/tests_models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movies/tests/tests_tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/movies/tests/tests_tasks.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movies/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/movies/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movies/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/movies/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uv.lock" beforeDir="false" afterPath="$PROJECT_DIR$/uv.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/whichmovie/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/whichmovie/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/whichmovie/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/whichmovie/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/whichmovie/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/whichmovie/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/whichmovie/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/whichmovie/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -164,7 +204,10 @@
       <workItem from="1763729816934" duration="9503000" />
       <workItem from="1763973494087" duration="654000" />
       <workItem from="1764230855351" duration="245000" />
-      <workItem from="1764331372891" duration="5978000" />
+      <workItem from="1764331372891" duration="9004000" />
+      <workItem from="1764576115460" duration="641000" />
+      <workItem from="1765531965767" duration="3062000" />
+      <workItem from="1765545088843" duration="3225000" />
     </task>
     <task id="LOCAL-00001" summary="Fix - Removed whichfilm app">
       <option name="closed" value="true" />
@@ -414,7 +457,23 @@
       <option name="project" value="LOCAL" />
       <updated>1764337323222</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="feat: Refactor test cases to use fixtures for MubiClient and enhance integration tests">
+      <option name="closed" value="true" />
+      <created>1764337710325</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1764337710325</updated>
+    </task>
+    <task id="LOCAL-00033" summary="feat: Refactor tests for MubiClient and RottenTomatoesClient to use parameterized cases">
+      <option name="closed" value="true" />
+      <created>1764338017396</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1764338017396</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -432,9 +491,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="refactor: Rename Django project folder from whichfilm_platform to whichfilm" />
-    <MESSAGE value="fix: Update Django settings module from whichfilm to whichmovie" />
-    <MESSAGE value="feat: Add initial migration and models for Movie and Film" />
     <MESSAGE value="feat: Initialize Dramatiq and configure broker settings" />
     <MESSAGE value="feat: Add Dramatiq crontab integration and new migration for Movie model" />
     <MESSAGE value="feat: Add TMDB enrichment task for movies and update cron schedule" />
@@ -457,14 +513,17 @@
     <MESSAGE value="feat: Add comprehensive code implementation guide for Movies app in README" />
     <MESSAGE value="feat: Add comprehensive README documentation for WhichMovie project setup and configuration" />
     <MESSAGE value="feat: Refactor test files and update workspace configuration" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: Refactor test files and update workspace configuration" />
+    <MESSAGE value="feat: Refactor test cases to use fixtures for MubiClient and enhance integration tests" />
+    <MESSAGE value="feat: Refactor tests for MubiClient and RottenTomatoesClient to use parameterized cases" />
+    <MESSAGE value="refactor: Clean up code formatting and improve consistency across files" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: Clean up code formatting and improve consistency across files" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="NONE" type="python-line">
           <url>file://$PROJECT_DIR$/movies/tasks.py</url>
-          <line>13</line>
+          <line>16</line>
           <log-expression expression="logger.info(f&quot;[UPDATED] {video['title']} ({video['year']})&quot;)&#10;&#10;        logger.info(f&quot;Task completed: {created_count} new, {updated_count} updated&quot;)&#10;&#10;    except Exception as e:&#10;        logger.error(f&quot;Error fetching YouTube videos: {e}&quot;, exc_info=True)&#10;        raise" language="Python" />
           <option name="timeStamp" value="1" />
         </line-breakpoint>

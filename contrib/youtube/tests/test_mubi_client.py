@@ -6,8 +6,10 @@ Organized by method type:
 - API tests: _fetch_videos (with mocking)
 - Integration tests: get_data (full pipeline)
 """
+
 import pytest
-from contrib.youtube.api import MubiClient, RottenTomatoesClient
+
+from contrib.youtube.api import MubiClient
 
 
 class TestMubiClientCleanTitle:
@@ -22,7 +24,10 @@ class TestMubiClientCleanTitle:
         "input_title,expected_output",
         [
             ("DUNE | Official Trailer #1", "DUNE"),
-            ("BLADE RUNNER 2049 | Official Trailer | In Cinemas Now", "BLADE RUNNER 2049"),
+            (
+                "BLADE RUNNER 2049 | Official Trailer | In Cinemas Now",
+                "BLADE RUNNER 2049",
+            ),
             ("OPPENHEIMER | Official Teaser (2023)", None),
             ("Random YouTube Video Title", None),
         ],
@@ -42,10 +47,10 @@ class TestMubiClientFetchVideos:
 
         # Assert we got a list with correct number of videos
         assert len(result) == 3
-        assert result[0]['title'] == 'DUNE | Official Trailer #1'
-        assert result[0]['video_id'] == 'mubi_abc123'
-        assert result[1]['video_id'] == 'mubi_xyz789'
-        assert result[2]['video_id'] == 'mubi_skip123'
+        assert result[0]["title"] == "DUNE | Official Trailer #1"
+        assert result[0]["video_id"] == "mubi_abc123"
+        assert result[1]["video_id"] == "mubi_xyz789"
+        assert result[2]["video_id"] == "mubi_skip123"
 
 
 class TestMubiClientExtractTitleAndId:
@@ -62,9 +67,21 @@ class TestMubiClientExtractTitleAndId:
             (
                 # Filters teasers
                 [
-                    {'title': 'DUNE | Official Trailer #1', 'video_id': 'mubi_abc123', 'description': 'Sci-fi epic'},
-                    {'title': 'BLADE RUNNER 2049 | Official Trailer | In Cinemas Now', 'video_id': 'mubi_xyz789', 'description': 'Sci-fi masterpiece'},
-                    {'title': 'OPPENHEIMER | Official Teaser (2023)', 'video_id': 'mubi_skip123', 'description': 'Teaser (should be skipped)'},
+                    {
+                        "title": "DUNE | Official Trailer #1",
+                        "video_id": "mubi_abc123",
+                        "description": "Sci-fi epic",
+                    },
+                    {
+                        "title": "BLADE RUNNER 2049 | Official Trailer | In Cinemas Now",
+                        "video_id": "mubi_xyz789",
+                        "description": "Sci-fi masterpiece",
+                    },
+                    {
+                        "title": "OPPENHEIMER | Official Teaser (2023)",
+                        "video_id": "mubi_skip123",
+                        "description": "Teaser (should be skipped)",
+                    },
                 ],
                 2,
                 ["DUNE", "BLADE RUNNER 2049"],
@@ -72,31 +89,37 @@ class TestMubiClientExtractTitleAndId:
             (
                 # Preserves original title
                 [
-                    {'title': 'ARRIVAL | Official Trailer #1', 'video_id': 'mubi_vid123', 'description': 'Sci-fi drama'},
+                    {
+                        "title": "ARRIVAL | Official Trailer #1",
+                        "video_id": "mubi_vid123",
+                        "description": "Sci-fi drama",
+                    },
                 ],
                 1,
                 ["ARRIVAL"],
             ),
         ],
     )
-    def test_extract_title_and_id(self, client, raw_videos, expected_count, expected_titles):
+    def test_extract_title_and_id(
+        self, client, raw_videos, expected_count, expected_titles
+    ):
         """Test _extract_title_and_id with various video lists."""
         result = client._extract_title_and_id(raw_videos)
 
         assert len(result) == expected_count
         for i, expected_title in enumerate(expected_titles):
-            assert result[i]['title'] == expected_title
+            assert result[i]["title"] == expected_title
 
         # Additional checks for first test case (filters teasers)
         if expected_count == 2:
-            assert result[0]['video_id'] == 'mubi_abc123'
-            assert result[1]['video_id'] == 'mubi_xyz789'
-            assert result[1]['year'] is None
+            assert result[0]["video_id"] == "mubi_abc123"
+            assert result[1]["video_id"] == "mubi_xyz789"
+            assert result[1]["year"] is None
 
         # Additional checks for second test case (preserves original title)
         if expected_count == 1 and expected_titles[0] == "ARRIVAL":
-            assert result[0]['original_title'] == "ARRIVAL | Official Trailer #1"
-            assert result[0]['video_id'] == 'mubi_vid123'
+            assert result[0]["original_title"] == "ARRIVAL | Official Trailer #1"
+            assert result[0]["video_id"] == "mubi_vid123"
 
 
 class TestMubiClientGetData:
@@ -111,16 +134,19 @@ class TestMubiClientGetData:
         assert len(result) == 2  # 3 videos, 1 filtered (teaser)
 
         # Verify first video
-        assert result[0]['title'] == "DUNE"
-        assert result[0]['original_title'] == "DUNE | Official Trailer #1"
-        assert result[0]['video_id'] == "mubi_abc123"
-        assert result[0]['year'] is None  # MUBI format doesn't have year
+        assert result[0]["title"] == "DUNE"
+        assert result[0]["original_title"] == "DUNE | Official Trailer #1"
+        assert result[0]["video_id"] == "mubi_abc123"
+        assert result[0]["year"] is None  # MUBI format doesn't have year
 
         # Verify second video
-        assert result[1]['title'] == "BLADE RUNNER 2049"
-        assert result[1]['original_title'] == "BLADE RUNNER 2049 | Official Trailer | In Cinemas Now"
-        assert result[1]['video_id'] == "mubi_xyz789"
-        assert result[1]['year'] is None
+        assert result[1]["title"] == "BLADE RUNNER 2049"
+        assert (
+            result[1]["original_title"]
+            == "BLADE RUNNER 2049 | Official Trailer | In Cinemas Now"
+        )
+        assert result[1]["video_id"] == "mubi_xyz789"
+        assert result[1]["year"] is None
 
     def test_get_data__filters_teasers(self, mubi_client_mocked):
         """Test that teaser videos are filtered out."""
@@ -130,29 +156,29 @@ class TestMubiClientGetData:
         assert len(result) == 2
 
         # Verify no teaser in results
-        titles = [v['title'] for v in result]
+        titles = [v["title"] for v in result]
         assert "OPPENHEIMER" not in titles  # Teaser was filtered
 
     def test_get_data__filters_coming_soon(self, mubi_client_mocked):
         """Test that 'Coming Soon' announcements are filtered."""
         raw_videos = [
             {
-                'title': 'DUNE | Official Trailer #1',
-                'video_id': 'mubi_abc123',
-                'description': 'Sci-fi epic'
+                "title": "DUNE | Official Trailer #1",
+                "video_id": "mubi_abc123",
+                "description": "Sci-fi epic",
             },
             {
-                'title': 'UPCOMING FILM | Coming Soon',
-                'video_id': 'mubi_upcoming',
-                'description': 'Coming soon'
-            }
+                "title": "UPCOMING FILM | Coming Soon",
+                "video_id": "mubi_upcoming",
+                "description": "Coming soon",
+            },
         ]
 
         result = mubi_client_mocked._extract_title_and_id(raw_videos)
 
         # Should only have 1 video
         assert len(result) == 1
-        assert result[0]['title'] == "DUNE"
+        assert result[0]["title"] == "DUNE"
 
     def test_get_data__handles_pipe_separator(self, mubi_client_mocked):
         """Test correct extraction with pipe separator."""
@@ -160,33 +186,36 @@ class TestMubiClientGetData:
 
         # Pipes should be removed from titles
         for video in result:
-            assert '|' not in video['title']
+            assert "|" not in video["title"]
             # But should be in original
-            assert '|' in video['original_title']
+            assert "|" in video["original_title"]
 
     def test_get_data__uppercase_titles(self, mubi_client_mocked):
         """Test that uppercase MUBI titles are preserved."""
         result = mubi_client_mocked.get_data()
 
         # MUBI uses uppercase titles
-        assert result[0]['title'] == "DUNE"  # Uppercase
-        assert result[1]['title'] == "BLADE RUNNER 2049"  # Uppercase
+        assert result[0]["title"] == "DUNE"  # Uppercase
+        assert result[1]["title"] == "BLADE RUNNER 2049"  # Uppercase
 
     def test_get_data__handles_multiple_pipes(self, mubi_client_mocked):
         """Test extraction with multiple pipes in title."""
         raw_videos = [
             {
-                'title': 'MOVIE NAME | Official Trailer #1 | In Cinemas Now | More Info',
-                'video_id': 'mubi_test',
-                'description': 'Test'
+                "title": "MOVIE NAME | Official Trailer #1 | In Cinemas Now | More Info",
+                "video_id": "mubi_test",
+                "description": "Test",
             }
         ]
 
         result = mubi_client_mocked._extract_title_and_id(raw_videos)
 
         # Should extract everything before first pipe
-        assert result[0]['title'] == "MOVIE NAME"
-        assert result[0]['original_title'] == "MOVIE NAME | Official Trailer #1 | In Cinemas Now | More Info"
+        assert result[0]["title"] == "MOVIE NAME"
+        assert (
+            result[0]["original_title"]
+            == "MOVIE NAME | Official Trailer #1 | In Cinemas Now | More Info"
+        )
 
     def test_get_data__extracts_all_required_fields(self, mubi_client_mocked):
         """Test that all required fields are present."""
@@ -194,15 +223,15 @@ class TestMubiClientGetData:
 
         for video in result:
             # All these fields must exist
-            assert 'title' in video
-            assert 'original_title' in video
-            assert 'video_id' in video
-            assert 'year' in video
+            assert "title" in video
+            assert "original_title" in video
+            assert "video_id" in video
+            assert "year" in video
 
             # Verify non-empty values where expected
-            assert video['title'] != ""
-            assert video['original_title'] != ""
-            assert video['video_id'] != ""
+            assert video["title"] != ""
+            assert video["original_title"] != ""
+            assert video["video_id"] != ""
 
     def test_get_data__year_is_none_for_mubi(self, mubi_client_mocked):
         """Test that MUBI titles don't extract year (format doesn't include it)."""
@@ -210,7 +239,7 @@ class TestMubiClientGetData:
 
         # All MUBI videos should have year=None
         for video in result:
-            assert video['year'] is None
+            assert video["year"] is None
 
     def test_get_data__integration_full_pipeline(self, mubi_client_mocked):
         """Test the full pipeline: fetch → extract → clean → return."""
@@ -225,32 +254,31 @@ class TestMubiClientGetData:
         # Each result should be properly processed
         for video in result:
             # Should have gone through _clean_title successfully
-            assert "|" not in video['title']  # Pipes removed
-            assert "Official Trailer" not in video['title']  # Trailer format removed
+            assert "|" not in video["title"]  # Pipes removed
+            assert "Official Trailer" not in video["title"]  # Trailer format removed
             # Should still have the raw version
-            assert "|" in video['original_title']
+            assert "|" in video["original_title"]
 
     def test_get_data__preserves_video_order(self, mubi_client_mocked):
         """Test that videos maintain their original order."""
         result = mubi_client_mocked.get_data()
 
         # First video should be DUNE
-        assert result[0]['title'] == "DUNE"
+        assert result[0]["title"] == "DUNE"
         # Second should be BLADE RUNNER (teaser filtered)
-        assert result[1]['title'] == "BLADE RUNNER 2049"
+        assert result[1]["title"] == "BLADE RUNNER 2049"
 
     def test_get_data__empty_list_returns_empty(self, monkeypatch):
         """Test that empty YouTube response returns empty list."""
         from unittest.mock import MagicMock
 
         mock_instance = MagicMock()
-        mock_instance.extract_info.return_value = {'entries': []}
+        mock_instance.extract_info.return_value = {"entries": []}
         mock_instance.__enter__.return_value = mock_instance
         mock_instance.__exit__.return_value = None
 
         monkeypatch.setattr(
-            'contrib.youtube.api.YoutubeDL',
-            lambda *args, **kwargs: mock_instance
+            "contrib.youtube.api.YoutubeDL", lambda *args, **kwargs: mock_instance
         )
 
         client = MubiClient()
@@ -258,7 +286,9 @@ class TestMubiClientGetData:
 
         assert result == []
 
-    def test_get_data__vs_rotten_tomatoes_differences(self, mubi_client_mocked, rotten_tomatoes_client_mocked):
+    def test_get_data__vs_rotten_tomatoes_differences(
+        self, mubi_client_mocked, rotten_tomatoes_client_mocked
+    ):
         """Test that MUBI client behaves differently from RottenTomatoes client."""
         mubi_result = mubi_client_mocked.get_data()
         rt_result = rotten_tomatoes_client_mocked.get_data()
@@ -269,16 +299,16 @@ class TestMubiClientGetData:
 
         # MUBI uses pipe separator, RottenTomatoes doesn't
         if mubi_result:
-            assert '|' not in mubi_result[0]['title']
-            assert '|' in mubi_result[0]['original_title']
+            assert "|" not in mubi_result[0]["title"]
+            assert "|" in mubi_result[0]["original_title"]
 
         if rt_result:
-            assert '|' not in rt_result[0]['title']
-            assert '|' not in rt_result[0]['original_title']
+            assert "|" not in rt_result[0]["title"]
+            assert "|" not in rt_result[0]["original_title"]
 
         # MUBI year is always None, RottenTomatoes extracts year
         if mubi_result:
-            assert mubi_result[0]['year'] is None
+            assert mubi_result[0]["year"] is None
         if rt_result:
             # RottenTomatoes should have extracted year
-            assert rt_result[0]['year'] == 2025
+            assert rt_result[0]["year"] == 2025

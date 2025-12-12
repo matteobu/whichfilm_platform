@@ -7,9 +7,6 @@ Organized by method type:
 - Interface tests: get_data
 - Error handling: ValidationError, NetworkError
 """
-import pytest
-from contrib.tmdb.api import TMDBClient
-from contrib.base import ValidationError, NetworkError
 
 
 class TestTMDBClientSearchMovie:

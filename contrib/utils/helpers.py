@@ -1,10 +1,11 @@
 """Common helper functions for contrib modules."""
 
 import requests
+
 from contrib.base import NetworkError
 
 
-def safe_request(url, method='GET', timeout=10, **kwargs):
+def safe_request(url, method="GET", timeout=10, **kwargs):
     """
     Make a safe HTTP request with error handling.
 

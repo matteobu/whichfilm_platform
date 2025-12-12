@@ -7,10 +7,6 @@ Tests the Movie model:
 - Relationships
 - String representations
 """
-import pytest
-from django.db import IntegrityError
-from django.utils import timezone
-from movies.models import Movie
 
 
 class TestMovieModel:

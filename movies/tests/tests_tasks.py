@@ -8,15 +8,6 @@ Tests the orchestration layer that:
 
 Uses mocked clients and database fixtures.
 """
-import pytest
-from django.utils import timezone
-from movies.models import Movie
-from movies.tasks import (
-    fetch_rotten_tomatoes_videos,
-    fetch_mubi_videos,
-    enrich_movies_with_tmdb,
-    _fetch_and_save_videos
-)
 
 
 class TestFetchAndSaveVideos:

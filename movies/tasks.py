@@ -4,12 +4,15 @@ Dramatiq tasks for the movies app.
 Defines async tasks and cron jobs for movie data fetching and processing.
 """
 
+import logging
+
 import dramatiq
 from dramatiq_crontab import cron
-from contrib.youtube import RottenTomatoesClient, MubiClient
+
 from contrib.tmdb import TMDBClient
+from contrib.youtube import MubiClient, RottenTomatoesClient
+
 from .models import Movie
-import logging
 
 logger = logging.getLogger(__name__)
 
@@ -42,7 +45,7 @@ def _fetch_and_save_videos(client, source_name):
 
         for video in videos:
             # Check if movie already exists by title
-            existing_movie = Movie.objects.filter(title=video['title']).first()
+            existing_movie = Movie.objects.filter(title=video["title"]).first()
 
             if existing_movie:
                 # Movie already exists, skip it
@@ -52,11 +55,12 @@ def _fetch_and_save_videos(client, source_name):
 
             # Create new movie
             movie = Movie.objects.create(
-                title=video['title'],
-                original_title=video['original_title'],
-                video_id=video['video_id'],
-                source=source_name
+                title=video["title"],
+                original_title=video["original_title"],
+                video_id=video["video_id"],
+                source=source_name,
             )
+            print(movie)
             created_count += 1
             logger.info(f"[NEW] {video['title']} ({video['year']})")
 
@@ -67,7 +71,7 @@ def _fetch_and_save_videos(client, source_name):
         raise
 
 
-@cron('0 0 * * *')  # Run daily at midnight UTC
+@cron("0 0 * * *")  # Run daily at midnight UTC
 @dramatiq.actor(max_retries=3)
 def fetch_rotten_tomatoes_videos():
     """
@@ -77,10 +81,10 @@ def fetch_rotten_tomatoes_videos():
     Runs daily at midnight UTC.
     """
     client = RottenTomatoesClient()
-    _fetch_and_save_videos(client, 'rotten_tomatoes')
+    _fetch_and_save_videos(client, "rotten_tomatoes")
 
 
-@cron('0 1 * * *')  # Run daily at 1 AM UTC (after YouTube fetch at midnight)
+@cron("0 1 * * *")  # Run daily at 1 AM UTC (after YouTube fetch at midnight)
 @dramatiq.actor(max_retries=3)
 def fetch_mubi_videos():
     """
@@ -90,10 +94,10 @@ def fetch_mubi_videos():
     Runs daily at 1 AM UTC (1 hour after RottenTomatoes fetch).
     """
     client = MubiClient()
-    _fetch_and_save_videos(client, 'mubi')
+    _fetch_and_save_videos(client, "mubi")
 
 
-@cron('0 2 * * *')  # Run daily at 2 AM UTC (after MUBI fetch at 1 AM)
+@cron("0 2 * * *")  # Run daily at 2 AM UTC (after MUBI fetch at 1 AM)
 @dramatiq.actor(max_retries=3)
 def enrich_movies_with_tmdb():
     """
@@ -128,16 +132,18 @@ def enrich_movies_with_tmdb():
 
                 if tmdb_data:
                     # Update movie with TMDB data
-                    movie.tmdb_id = tmdb_data.get('id')
-                    movie.imdb_id = tmdb_data.get('imdb_id')
-                    movie.overview = tmdb_data.get('overview')
-                    movie.release_date = tmdb_data.get('release_date')
-                    movie.poster_path = tmdb_data.get('poster_path')
-                    movie.backdrop_path = tmdb_data.get('backdrop_path')
+                    movie.tmdb_id = tmdb_data.get("id")
+                    movie.imdb_id = tmdb_data.get("imdb_id")
+                    movie.overview = tmdb_data.get("overview")
+                    movie.release_date = tmdb_data.get("release_date")
+                    movie.poster_path = tmdb_data.get("poster_path")
+                    movie.backdrop_path = tmdb_data.get("backdrop_path")
                     movie.save()
 
                     enriched_count += 1
-                    logger.info(f"[ENRICHED] {movie.title} with TMDB ID: {tmdb_data.get('id')}")
+                    logger.info(
+                        f"[ENRICHED] {movie.title} with TMDB ID: {tmdb_data.get('id')}"
+                    )
                 else:
                     logger.info(f"[NOT FOUND] {movie.title} not found on TMDB")
 

@@ -20,9 +20,11 @@ class Movie(models.Model):
     # Source tracking
     source = models.CharField(
         max_length=50,
-        help_text="Source of the title (e.g., 'youtube_title', 'festival_title')"
+        help_text="Source of the title (e.g., 'youtube_title', 'festival_title')",
     )
-    video_id = models.CharField(max_length=50, blank=True, null=True)  # YouTube video ID
+    video_id = models.CharField(
+        max_length=50, blank=True, null=True
+    )  # YouTube video ID
 
     # TMDB enrichment fields (populated by enrich_movies_with_tmdb task)
     overview = models.TextField(blank=True, null=True)
@@ -38,4 +40,4 @@ class Movie(models.Model):
         return self.title
 
     class Meta:
-        ordering = ['-created_at']
+        ordering = ["-created_at"]

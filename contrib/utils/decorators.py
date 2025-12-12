@@ -1,8 +1,9 @@
 """Reusable decorators for contrib modules."""
 
-import time
 import functools
-from typing import Callable, Any
+import time
+from collections.abc import Callable
+from typing import Any
 
 
 def retry(max_attempts=3, delay=1, backoff=2):
@@ -19,6 +20,7 @@ def retry(max_attempts=3, delay=1, backoff=2):
         def fetch_data():
             ...
     """
+
     def decorator(func: Callable) -> Callable:
         @functools.wraps(func)
         def wrapper(*args, **kwargs) -> Any:
@@ -31,13 +33,16 @@ def retry(max_attempts=3, delay=1, backoff=2):
                 except Exception as e:
                     last_exception = e
                     if attempt < max_attempts - 1:
-                        print(f"Attempt {attempt + 1} failed: {e}. Retrying in {current_delay}s...")
+                        print(
+                            f"Attempt {attempt + 1} failed: {e}. Retrying in {current_delay}s..."
+                        )
                         time.sleep(current_delay)
                         current_delay *= backoff
 
             raise last_exception
 
         return wrapper
+
     return decorator
 
 
@@ -53,6 +58,7 @@ def cached(ttl=3600):
         def get_expensive_data():
             ...
     """
+
     def decorator(func: Callable) -> Callable:
         cache = {}
         cache_time = {}
@@ -71,4 +77,5 @@ def cached(ttl=3600):
             return result
 
         return wrapper
+
     return decorator

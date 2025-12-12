@@ -9,14 +9,14 @@ Tests the complete flow:
 
 This tests the public get_data() method which combines all the pieces.
 """
-import pytest
-from contrib.youtube.api import RottenTomatoesClient, MubiClient
 
 
 class TestRottenTomatoesClientIntegration:
     """Integration tests for RottenTomatoesClient.get_data() full pipeline."""
 
-    def test_get_data__full_pipeline_with_mocked_api(self, rotten_tomatoes_client_mocked):
+    def test_get_data__full_pipeline_with_mocked_api(
+        self, rotten_tomatoes_client_mocked
+    ):
         """
         Test that get_data() returns filtered and cleaned videos.
 
@@ -86,7 +86,7 @@ class TestRottenTomatoesClientIntegration:
         pass
 
     def test_get_data__extracts_years_correctly(self, rotten_tomatoes_client_mocked):
-        """
+        r"""
         Test that get_data() extracts years from titles.
 
         NEEDS:
@@ -196,7 +196,9 @@ class TestYouTubeClientsComparison:
         """
         pass
 
-    def test_both_clients_skip_teasers(self, rotten_tomatoes_client_mocked, mubi_client_mocked):
+    def test_both_clients_skip_teasers(
+        self, rotten_tomatoes_client_mocked, mubi_client_mocked
+    ):
         """
         Test that both clients skip teaser videos.
 

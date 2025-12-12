@@ -1,10 +1,11 @@
 """TMDB API client for fetching movie information."""
 
-import requests
 import logging
+
+import requests
 from decouple import config
 
-from contrib.base import BaseClient, ValidationError, NetworkError
+from contrib.base import BaseClient, NetworkError, ValidationError
 
 logger = logging.getLogger(__name__)
 
@@ -25,7 +26,7 @@ class TMDBClient(BaseClient):
         Args:
             api_key (str, optional): TMDB API key. Defaults to TMDB_API_KEY env var.
         """
-        self.api_key = api_key or config('TMDB_API_KEY', default=None)
+        self.api_key = api_key or config("TMDB_API_KEY", default=None)
         super().__init__()
 
     def _validate_config(self):
@@ -53,7 +54,7 @@ class TMDBClient(BaseClient):
             params = {}
 
         # Add API key to params
-        params['api_key'] = self.api_key
+        params["api_key"] = self.api_key
 
         try:
             url = f"{self.BASE_URL}{endpoint}"
@@ -85,28 +86,30 @@ class TMDBClient(BaseClient):
         """
         try:
             params = {
-                'query': title,
-                'include_adult': False,
+                "query": title,
+                "include_adult": False,
             }
 
             if year:
-                params['year'] = year
+                params["year"] = year
 
             # Search for the movie
-            response = self._make_request('/search/movie', params)
+            response = self._make_request("/search/movie", params)
 
-            if not response.get('results'):
+            if not response.get("results"):
                 logger.info(f"No results found for '{title}'")
                 return None
 
             # Get the first (most relevant) result
-            movie = response['results'][0]
+            movie = response["results"][0]
 
             # Try to get IMDb ID (requires additional request)
-            imdb_id = self._get_imdb_id(movie['id'])
-            movie['imdb_id'] = imdb_id
+            imdb_id = self._get_imdb_id(movie["id"])
+            movie["imdb_id"] = imdb_id
 
-            logger.info(f"Found movie: {movie.get('title')} (TMDB ID: {movie.get('id')})")
+            logger.info(
+                f"Found movie: {movie.get('title')} (TMDB ID: {movie.get('id')})"
+            )
             return movie
 
         except NetworkError as e:
@@ -124,8 +127,8 @@ class TMDBClient(BaseClient):
             str or None: IMDb ID if found, None otherwise
         """
         try:
-            response = self._make_request(f'/movie/{tmdb_id}/external_ids')
-            return response.get('imdb_id')
+            response = self._make_request(f"/movie/{tmdb_id}/external_ids")
+            return response.get("imdb_id")
         except NetworkError as e:
             logger.warning(f"Could not fetch IMDb ID for TMDB ID {tmdb_id}: {e}")
             return None
@@ -140,8 +143,8 @@ class TMDBClient(BaseClient):
         Returns:
             dict: Movie data from TMDB
         """
-        title = kwargs.get('query') or kwargs.get('title')
-        year = kwargs.get('year')
+        title = kwargs.get("query") or kwargs.get("title")
+        year = kwargs.get("year")
 
         if not title:
             raise ValidationError("'title' or 'query' parameter is required")

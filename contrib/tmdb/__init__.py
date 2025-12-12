@@ -2,4 +2,4 @@
 
 from .api import TMDBClient
 
-__all__ = ['TMDBClient']
+__all__ = ["TMDBClient"]

@@ -1,10 +1,11 @@
 """YouTube API client for fetching video information from multiple channels."""
 
-import re
 import logging
+import re
+
 from yt_dlp import YoutubeDL
 
-from contrib.base import BaseClient, ValidationError, NetworkError
+from contrib.base import BaseClient, NetworkError, ValidationError
 
 logger = logging.getLogger(__name__)
 
@@ -23,7 +24,9 @@ class YouTubeBaseClient(BaseClient):
     def __init__(self):
         """Initialize YouTube base client."""
         if not self.CHANNEL_URL and not self.CHANNEL_ID:
-            raise ValidationError("CHANNEL_URL or CHANNEL_ID must be defined in subclass")
+            raise ValidationError(
+                "CHANNEL_URL or CHANNEL_ID must be defined in subclass"
+            )
         super().__init__()
 
     def _validate_config(self):
@@ -58,27 +61,27 @@ class YouTubeBaseClient(BaseClient):
             logger.debug(f"Fetching videos from: {channel_url}")
 
             ydl_opts = {
-                'extract_flat': 'in_playlist',
-                'quiet': False,
-                'no_warnings': False,
-                'socket_timeout': 30,
+                "extract_flat": "in_playlist",
+                "quiet": False,
+                "no_warnings": False,
+                "socket_timeout": 30,
             }
 
             with YoutubeDL(ydl_opts) as ydl:
                 result = ydl.extract_info(channel_url, download=False)
 
-            if not result or 'entries' not in result:
+            if not result or "entries" not in result:
                 raise NetworkError("No videos found in channel")
 
             videos = []
-            for entry in result['entries']:
+            for entry in result["entries"]:
                 video = {
-                    'title': entry.get('title', ''),
-                    'description': entry.get('description', ''),
-                    'published': entry.get('upload_date', ''),
-                    'video_url': entry.get('url', ''),
-                    'video_id': entry.get('id', ''),
-                    'thumbnail': entry.get('thumbnail', ''),
+                    "title": entry.get("title", ""),
+                    "description": entry.get("description", ""),
+                    "published": entry.get("upload_date", ""),
+                    "video_url": entry.get("url", ""),
+                    "video_id": entry.get("id", ""),
+                    "thumbnail": entry.get("thumbnail", ""),
                 }
                 videos.append(video)
 
@@ -98,7 +101,7 @@ class YouTubeBaseClient(BaseClient):
         Returns:
             int or None: Year if found, None otherwise
         """
-        match = re.search(r'\((\d{4})\)', title)
+        match = re.search(r"\((\d{4})\)", title)
         if match:
             return int(match.group(1))
         return None
@@ -115,7 +118,7 @@ class YouTubeBaseClient(BaseClient):
         """
         processed = []
         for video in videos:
-            original_title = video['title']
+            original_title = video["title"]
 
             # Clean title using channel-specific logic
             cleaned_title = self._clean_title(original_title)
@@ -128,14 +131,16 @@ class YouTubeBaseClient(BaseClient):
             year = self._extract_year(original_title)
 
             # Video ID is already extracted by yt-dlp
-            video_id = video.get('video_id', '')
+            video_id = video.get("video_id", "")
 
-            processed.append({
-                'title': cleaned_title,
-                'year': year,
-                'original_title': original_title,
-                'video_id': video_id
-            })
+            processed.append(
+                {
+                    "title": cleaned_title,
+                    "year": year,
+                    "original_title": original_title,
+                    "video_id": video_id,
+                }
+            )
         return processed
 
     def get_data(self, **kwargs):
@@ -179,12 +184,12 @@ class RottenTomatoesClient(YouTubeBaseClient):
             str or None: Cleaned title, or None if not official trailer
         """
         # Only process if it has "Trailer #" (official trailers, not teasers)
-        if 'Trailer #' not in title:
+        if "Trailer #" not in title:
             return None
 
         # Extract everything before "Official Trailer #" or just "Trailer #"
         # Pattern matches: "Title Official Trailer #" or "Title Trailer #"
-        match = re.match(r'^(.+?)\s+(?:Official\s+)?Trailer\s+#', title)
+        match = re.match(r"^(.+?)\s+(?:Official\s+)?Trailer\s+#", title)
 
         if match:
             cleaned = match.group(1).strip()
@@ -224,17 +229,17 @@ class MubiClient(YouTubeBaseClient):
         logger.debug(f"[MubiClient] Raw title: {title}")
 
         # Exclude teasers and "Coming Soon"
-        if 'Official Teaser' in title or 'Coming Soon' in title:
+        if "Official Teaser" in title or "Coming Soon" in title:
             logger.debug(f"[MubiClient] Skipped (teaser/coming soon): {title}")
             return None
 
         # Only process if it has "Official Trailer"
-        if 'Official Trailer' not in title:
+        if "Official Trailer" not in title:
             logger.debug(f"[MubiClient] Skipped (no 'Official Trailer'): {title}")
             return None
 
         # Extract everything before "Official Trailer" (remove pipes and whitespace)
-        match = re.match(r'^(.+?)\s*\|\s*Official Trailer', title)
+        match = re.match(r"^(.+?)\s*\|\s*Official Trailer", title)
         if match:
             cleaned = match.group(1).strip()
             logger.debug(f"[MubiClient] Extracted title: {cleaned}")

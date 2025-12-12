@@ -31,8 +31,10 @@ class RateLimiter:
 
     def __call__(self, func):
         """Decorator to rate limit a function."""
+
         @wraps(func)
         def wrapper(*args, **kwargs):
             self.wait_if_needed()
             return func(*args, **kwargs)
+
         return wrapper
